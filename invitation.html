@@ -2,272 +2,427 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mariage Avigael & Yoni</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,500;0,600;1,400&family=Great+Vibes&family=Lato:wght@300;400&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ornella & Charles | 2026</title>
     
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cinzel:wght@400;600&family=Cormorant+Garamond:wght@400;500;600&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        /* --- STYLE GLOBAL --- */
+        :root {
+            --coral:      #E8634A;
+            --terracotta: #C84B2F;
+            --peach:      #F5A678;
+            --gold:       #E8A020;
+            --gold-light: #FFB830;
+            --turquoise:  #2BBFB0;
+            --sand:       #FFF8EE;
+            --sand-deep:  #F5E6C8;
+            --text-dark:  #2A1505;
+            --text-mid:   #7A3515;
+            --text-soft:  #555;
+            --font-script: 'Great Vibes', cursive;
+            --font-serif:  'Cinzel', serif;
+            --font-main:   'Cormorant Garamond', serif;
+            --font-ui:     'Montserrat', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
+
         body {
-            margin: 0; padding: 0;
-            background: #fdfaf3 url('https://www.transparenttextures.com/patterns/parchment.png');
-            font-family: 'Cormorant Garamond', serif;
-            color: #333; text-align: center; overflow-x: hidden;
+            font-family: var(--font-main);
+            color: var(--text-dark);
+            overflow-x: hidden;
+            /* Fond écailles de soleil Ibiza */
+            background-color: #F5E0C0;
+            background-image:
+                radial-gradient(circle at 100% 150%, #FFF8EE 24%, var(--coral) 25%, var(--coral) 28%, #FFF8EE 29%, #FFF8EE 36%, var(--coral) 36%, var(--coral) 40%, transparent 40%, transparent),
+                radial-gradient(circle at 0 150%,   #FFF8EE 24%, var(--coral) 25%, var(--coral) 28%, #FFF8EE 29%, #FFF8EE 36%, var(--coral) 36%, var(--coral) 40%, transparent 40%, transparent),
+                radial-gradient(circle at 50% 100%, var(--coral) 10%, #FFF8EE 11%, #FFF8EE 23%, var(--coral) 24%, var(--coral) 30%, #FFF8EE 31%, #FFF8EE 43%, var(--coral) 44%, var(--coral) 50%, #FFF8EE 51%, #FFF8EE 63%, var(--coral) 64%, var(--coral) 71%, transparent 71%, transparent);
+            background-size: 100px 50px;
         }
 
-        /* --- ANIMATION PÉTALES D'OR --- */
-        .petal {
-            position: fixed; top: -10%; z-index: 9999;
-            user-select: none; pointer-events: none;
-            background: linear-gradient(135deg, #e5c064 0%, #ffffff 50%, #b38728 100%);
-            border-radius: 100% 10% 100% 10%; 
-            box-shadow: 0 0 5px rgba(214, 174, 87, 0.4);
-            animation: fall linear infinite;
-        }
-
-        @keyframes fall {
-            0% { transform: translateY(0) rotate(0deg) scale(0.6); opacity: 0; }
-            20% { opacity: 1; }
-            100% { transform: translateY(110vh) rotate(720deg) scale(1); opacity: 0; }
-        }
-
-        /* --- BOUTON MUSIQUE --- */
-        #music-control {
-            position: fixed; bottom: 20px; right: 20px;
-            z-index: 10000; width: 45px; height: 45px;
-            background: #d1a965; border-radius: 50%;
-            display: flex; align-items: center; justify-content: center;
-            cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        #music-icon { color: white; font-size: 20px; font-family: sans-serif; font-weight: bold; }
-
-        /* --- NAVIGATION --- */
+        /* NAV */
         nav {
-            position: fixed; top: 0; width: 100%;
-            background: rgba(253, 250, 243, 0.9); padding: 15px 0;
-            z-index: 1000; border-bottom: 1px solid rgba(209, 169, 101, 0.2);
-            text-transform: uppercase; font-size: 11px; letter-spacing: 2px; font-family: 'Lato', sans-serif;
+            position: sticky; top: 0; width: 100%; z-index: 1000;
+            background: rgba(255, 248, 238, 0.97);
+            border-bottom: 2px solid var(--gold);
+            padding: 15px 0;
+            display: flex; justify-content: center; gap: 20px;
+            backdrop-filter: blur(5px);
         }
-        nav a { text-decoration: none; color: #d1a965; margin: 0 10px; }
-
-        /* --- HEADER --- */
-        header { padding: 100px 20px 40px; }
-        .bsd { font-weight: bold; margin: 20px 0 10px; }
-        .maguen-david-chic { width: 50px; height: 50px; margin: 10px auto; display: block; }
-
-        /* --- TYPOGRAPHIE PRÉNOMS --- */
-        .mariés-names { 
-            font-family: 'Pinyon Script', cursive; 
-            font-size: clamp(38px, 10vw, 70px); 
-            margin: 10px 0; 
-            color: #d1a965; 
-            line-height: 1.2;
+        nav a {
+            text-decoration: none; color: var(--coral);
+            font-family: var(--font-ui); text-transform: uppercase;
+            letter-spacing: 1.5px; font-size: 0.62rem; font-weight: 700;
+            transition: color 0.2s;
         }
-        
-        .ampersand {
-            font-family: 'Cormorant Garamond', serif;
-            font-style: normal;
-            color: #d1a965;
-            margin: 0 10px;
-            font-size: 0.8em;
-            vertical-align: middle;
+        nav a:hover { color: var(--terracotta); }
+
+        /* WRAPPER */
+        .main-wrapper {
+            max-width: 600px;
+            margin: 0 auto; padding: 40px 15px 80px;
+            display: flex; flex-direction: column; gap: 40px;
         }
 
-        /* --- BLOCS FACE A FACE --- */
-        .family-section {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            max-width: 90%;
-            margin: 0 auto 40px;
-            gap: 10px;
-        }
-        .family-side {
-            width: 48%;
-            font-size: clamp(13px, 4vw, 18px); /* Plus gros */
-            line-height: 1.6;
+        /* CARD */
+        .card {
+            position: relative;
+            padding: 60px 25px;
+            background: linear-gradient(160deg, #FFFDF8 0%, #FFF6E8 60%, #FDEFD5 100%);
+            border: 1px solid rgba(232,160,32,0.5);
             text-align: center;
+            box-shadow: 0 15px 40px rgba(200,75,47,0.15);
+        }
+        .card::after {
+            content: ''; position: absolute; top: 10px; left: 10px; right: 10px; bottom: 10px;
+            border: 1px solid rgba(232,160,32,0.35); pointer-events: none;
         }
 
-        /* --- SECTIONS ET DETAILS --- */
-        section { padding: 60px 15px; max-width: 850px; margin: 0 auto; }
-        .card { background: rgba(255,255,255,0.3); padding: 30px 20px; border-radius: 5px; }
-        .section-title { font-family: 'Great Vibes', cursive; font-size: 45px; color: #d1a965; margin-bottom: 15px; }
-        .phrase-image { width: 100%; max-width: 600px; height: auto; margin: 10px auto 30px; display: block; }
-        
-        /* DETAILS ADRESSES ET TEXTES AGRANDIS */
-        .details-gros {
-            font-size: 22px; /* Plus gros */
-            line-height: 1.5;
-            margin: 15px 0;
+        /* Déco coins */
+        .deco-corner { position: absolute; font-size: 1.6rem; line-height: 1; pointer-events: none; }
+        .deco-tr { top: 16px; right: 18px; transform: scaleX(-1); }
+        .deco-bl { bottom: 16px; left: 18px; }
+
+        h3 {
+            font-family: var(--font-serif); font-size: 1.1rem;
+            letter-spacing: 4px; margin-bottom: 20px; color: var(--coral);
+            text-transform: uppercase;
         }
 
-        .horaire-gras {
-            font-weight: 900 !important; /* Gras très prononcé */
-            font-size: 1.2em;
-            color: #000;
+        .couple-names {
+            font-family: var(--font-script) !important;
+            font-size: 3.2rem; color: var(--text-dark); margin: 10px 0 5px;
+            text-shadow: 0 2px 10px rgba(200,75,47,0.12);
         }
 
-        .card h3 { font-size: 32px; margin: 15px 0; font-weight: 600; }
-        
-        .btn-group { display: flex; justify-content: center; gap: 10px; margin-top: 25px; }
-        .btn {
-            padding: 12px 25px; text-decoration: none; font-size: 11px;
-            letter-spacing: 1px; text-transform: uppercase; font-family: 'Lato', sans-serif;
-            border: 1px solid #d1a965; border-radius: 3px; transition: 0.3s;
+        .divider {
+            display: flex; align-items: center; gap: 8px;
+            width: 60%; margin: 20px auto;
         }
-        .btn-black { background: #d1a965; color: white; }
-        .btn-waze { border-color: #00d4ff; color: #00d4ff; }
+        .div-line { flex: 1; height: 0.5px; background: linear-gradient(90deg, transparent, var(--gold), transparent); }
+        .div-diamond { width: 5px; height: 5px; background: var(--gold); transform: rotate(45deg); }
 
-        .gold-line { width: 60px; height: 1px; background: #d1a965; margin: 30px auto; opacity: 0.4; }
+        /* Histoire */
+        .histoire-intro {
+            font-family: var(--font-script); font-size: 1.9rem;
+            color: var(--coral); line-height: 1.3; margin-bottom: 15px;
+        }
+        .histoire-body {
+            font-size: 1.05rem; line-height: 1.7; color: var(--text-soft); padding: 0 10px;
+        }
+        .histoire-cta {
+            font-family: var(--font-serif); letter-spacing: 2px; font-weight: 600;
+            color: var(--coral); text-transform: uppercase; font-size: 0.88rem;
+        }
 
-        /* --- FORMULAIRE --- */
-        .rsvp-box { background: rgba(255, 255, 255, 0.5); padding: 30px 15px; margin-top: 20px; border: 1px solid rgba(209, 169, 101, 0.2); }
-        .submit-btn { background: #d1a965; color: white; border: none; width: 100%; max-width: 400px; padding: 15px; cursor: pointer; font-weight: bold; font-size: 16px; }
+        /* Dates & lieux */
+        .date-text {
+            font-family: var(--font-serif); font-size: 1.1rem;
+            font-weight: 700; letter-spacing: 2px; color: var(--text-dark);
+        }
+        .time-text { font-size: 0.85rem; letter-spacing: 1px; font-weight: 600; color: var(--text-mid); }
+        .lieu-title { font-weight: 700; color: var(--coral); letter-spacing: 1px; margin-top: 18px; }
+        .lieu-name {
+            font-family: var(--font-serif); font-weight: 600;
+            font-size: 1.05rem; color: var(--text-dark); margin: 4px 0;
+        }
+        .lieu-adresse { font-size: 0.88rem; color: var(--text-soft); opacity: 0.85; }
+
+        /* Annonce familles */
+        .family-grid {
+            display: grid; grid-template-columns: 1fr 1fr;
+            gap: 20px; text-align: left; margin-bottom: 10px;
+        }
+        .family-side { font-family: var(--font-serif); color: var(--text-dark); }
+        .family-side.right { text-align: right; }
+        .family-title {
+            font-size: 0.95rem; font-weight: 600;
+            letter-spacing: 2px; text-transform: uppercase; display: block; color: var(--coral);
+        }
+        .announcement-text {
+            grid-column: 1 / -1; text-align: center;
+            margin: 20px 0 15px; font-size: 0.9rem;
+            color: var(--text-mid); line-height: 1.6; font-style: italic;
+        }
+
+        /* Mémorial */
+        .memorial {
+            margin-top: 40px; padding-top: 18px;
+            border-top: 0.5px solid rgba(232,160,32,0.3);
+            font-style: italic; font-size: 0.82rem;
+            color: var(--text-mid); line-height: 1.7;
+        }
+
+        /* Boutons waze / cal */
+        .btn-action {
+            display: inline-block; margin: 14px 8px 0;
+            color: var(--coral);
+            border-bottom: 1.5px solid var(--gold);
+            text-decoration: none; font-size: 0.68rem;
+            text-transform: uppercase; letter-spacing: 2px;
+            font-weight: 700; font-family: var(--font-ui);
+            transition: color 0.2s;
+        }
+        .btn-action:hover { color: var(--terracotta); }
+
+        /* RSVP Form */
+        form { text-align: left; margin-top: 20px; }
+        .form-label {
+            font-family: var(--font-serif); font-size: 0.7rem;
+            color: var(--coral); text-transform: uppercase;
+            font-weight: 700; margin-bottom: 5px; display: block;
+        }
+        input, select, textarea {
+            width: 100%; padding: 12px 0; border: none;
+            border-bottom: 1px solid rgba(232,160,32,0.4);
+            background: transparent; font-family: var(--font-ui);
+            font-size: 0.95rem; margin-bottom: 20px; outline: none;
+            color: var(--text-dark);
+        }
+        select option { color: #333; }
+        .btn-submit {
+            background: linear-gradient(135deg, var(--terracotta), var(--coral));
+            color: #fff; border: none; padding: 18px; width: 100%;
+            font-family: var(--font-serif); text-transform: uppercase;
+            letter-spacing: 3px; cursor: pointer; font-weight: 600;
+            box-shadow: 0 5px 18px rgba(200,75,47,0.35);
+            transition: opacity 0.2s;
+        }
+        .btn-submit:hover { opacity: 0.9; }
+        .hidden-qty { display: none; margin-bottom: 20px; padding-left: 10px; border-left: 2px solid var(--gold); }
+
+        /* Reveal animation */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease-out; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+        /* MUSIQUE */
+        #music-control {
+            position: fixed; bottom: 22px; right: 22px; z-index: 2000;
+            background: linear-gradient(135deg, var(--terracotta), var(--coral));
+            color: white; width: 52px; height: 52px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer;
+            box-shadow: 0 4px 18px rgba(200,75,47,0.45);
+            border: 2px solid var(--gold);
+        }
+        .music-anim { animation: pulse 2s infinite; }
+        @keyframes pulse {
+            0%   { transform: scale(1); }
+            50%  { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        /* Separateur soleil décoratif */
+        .sun-sep {
+            font-size: 1.1rem;
+            color: var(--gold);
+            letter-spacing: 6px;
+            margin: 10px 0 5px;
+        }
     </style>
 </head>
 <body>
 
-    <audio id="weddingMusic" loop><source src="musique.mp3" type="audio/mpeg"></audio>
-
-    <div id="music-control" onclick="toggleMusic()">
-        <span id="music-icon">||</span>
-    </div>
-
     <nav>
+        <a href="#histoire">Histoire</a>
         <a href="#mairie">Mairie</a>
         <a href="#houppa">Houppa</a>
-        <a href="#reponses">Répondre</a>
+        <a href="#confirmation">Réponses</a>
     </nav>
 
-    <header>
-        <div class="bsd">בס”ד</div>
-        <svg class="maguen-david-chic" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M50 5L89.4025 74.25H10.5975L50 5Z" stroke="#d1a965" stroke-width="2"/>
-            <path d="M50 95L10.5975 25.75H89.4025L50 95Z" stroke="#d1a965" stroke-width="2"/>
-        </svg>
-        <h1 class="mariés-names">Avigael <span class="ampersand">&</span> Yoni</h1>
-    </header>
+    <div id="music-control" onclick="toggleMusic()">
+        <i id="music-icon" class="fas fa-music"></i>
+    </div>
+    <audio id="bg-music" loop>
+        <source src="musique22.mp3" type="audio/mpeg">
+    </audio>
 
-    <section id="mairie">
-        <h2 class="section-title">Cérémonie Civile</h2>
-        <div class="card">
-            <p style="font-style: italic; font-size: 22px;">Avigael <span class="ampersand">&</span> Yoni se diront "Oui"</p>
-            <h3>Mardi 27 Juillet 2026</h3>
-            <div class="details-gros">
-                À <strong class="horaire-gras">10h30</strong><br>
-                <strong>Mairie du 17ᵉ arrondissement de Paris</strong><br>
-                16-20 Rue des Batignolles, 75017 Paris
-            </div>
+    <div class="main-wrapper">
+
+        <!-- HISTOIRE -->
+        <div id="histoire" class="card reveal">
+            <div class="deco-corner deco-tr">🌺</div>
+            <div class="deco-corner deco-bl">🌸</div>
+            <h3>Notre Histoire</h3>
+            <div class="divider"><div class="div-line"></div><div class="div-diamond"></div><div class="div-line"></div></div>
+            <p class="histoire-intro">Une évidence depuis le début…</p>
+            <div class="divider"><div class="div-line"></div><div class="div-diamond"></div><div class="div-line"></div></div>
+            <p class="histoire-cta">Et cette fois, c'est officiel :<br>on se dit oui !</p>
+            <div class="sun-sep">✦ 🍋 ✦</div>
         </div>
-        <div class="btn-group">
-            <a href="https://www.waze.com/ul?q=16-20%20Rue%20des%20Batignolles%2075017%20Paris" target="_blank" class="btn btn-waze">Waze</a>
-            <a href="#reponses" class="btn btn-black">Répondre</a>
-        </div>
-        <div class="gold-line"></div>
-    </section>
 
-    <section id="houppa">
-        <h2 class="section-title">Cérémonie Religieuse</h2>
-        
-        <img src="phrase3.png" alt="Célébration" class="phrase-image">
-
-        <div class="family-section">
-            <div class="family-side">
-                Mamie Lisa Alloun<br>
-                Mamie Gisèle Lasry<br>
-                Robert Lasry<br>
-                Mr et Mme Alloun
+        <!-- MAIRIE -->
+        <div id="mairie" class="card reveal">
+            <div class="deco-corner deco-tr">🌼</div>
+            <div class="deco-corner deco-bl">🌺</div>
+            <h3>Cérémonie Civile</h3>
+            <div class="couple-names">Ornella & Charles</div>
+            <div class="divider"><div class="div-line"></div><div class="div-diamond"></div><div class="div-line"></div></div>
+            <div class="date-text">Lundi 24 Août 2026</div>
+            <p class="time-text">À 14H00</p>
+            <div style="margin-top: 22px;">
+                <p class="lieu-title">MAIRIE DE SURESNES</p>
+                <p class="lieu-adresse">2 rue Carnot, 92150 Suresnes</p>
             </div>
-            <div class="family-side" style="border-left: 1px solid rgba(209,169,101,0.3);">
-                Raphaël Toledano<br>
-                Fanny Toledano<br>
-                Colette Haddad<br>
-                Claude Haddad<br>
-                Mr et Mme Haddad
+            <div class="btn-container" style="margin-top: 18px;">
+                <a href="https://waze.com/ul?q=2+rue+Carnot+92150+Suresnes&navigate=yes" target="_blank" class="btn-action">📍 Waze — Mairie</a>
+                <a href="data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0ABEGIN:VEVENT%0ADTSTART:20260824T120000Z%0ADTEND:20260824T150000Z%0ASUMMARY:Mariage%20Ornella%20%26%20Charles%20%E2%80%94%20Mairie%0ALOCATION:2%20rue%20Carnot%2C%2092150%20Suresnes%0AEND:VEVENT%0AEND:VCALENDAR" download="mariage-mairie.ics" class="btn-action">📅 Bloquer la date</a>
             </div>
         </div>
 
-        <p style="font-style: italic; font-size: 22px; margin-bottom: 30px; padding: 0 10px;">
-            Remercient Hachem de vous convier au mariage de leurs enfants et petits enfants
-        </p>
-        
-        <div class="card">
-            <h3 class="mariés-names">Avigael <span class="ampersand">&</span> Yoni</h3>
-            <p style="font-size: 30px; margin-bottom: 20px;">אביגיל <span class="ampersand">&</span> יוני</p>
-            <div class="details-gros">
-                <strong>Jeudi 30 Juillet 2026</strong><br>
-                Le 16 Av 5786
-            </div>
-            <div class="gold-line"></div>
-            <div class="details-gros">
-                À <strong class="horaire-gras">17h30</strong> Houppa<br><br>
-                <strong>Le Manoir des Cygnes</strong><br>
-                150 Les Berges de Seine<br>91830 Le Coudray-Montceaux
-            </div>
-        </div>
-        <div class="btn-group">
-            <a href="https://www.waze.com/ul?ll=48.564619,2.490072&navigate=yes" target="_blank" class="btn btn-waze">Waze</a>
-            <a href="#reponses" class="btn btn-black">Répondre</a>
-        </div>
-    </section>
+        <!-- HOUPPA & SOIRÉE -->
+        <div id="houppa" class="card reveal">
+            <div class="deco-corner deco-tr">🌸</div>
+            <div class="deco-corner deco-bl">🍋</div>
+            <h3>Houppa & Soirée</h3>
 
-    <section id="reponses">
-        <h2 class="section-title">Réponses</h2>
-        <div class="rsvp-box">
+            <div class="family-grid">
+                <div style="grid-column: 1 / -1; display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div class="family-side">
+                        <span class="family-title">Famille Haouzi</span>
+                    </div>
+                    <div class="family-side right">
+                        <span class="family-title">Famille de Charles</span>
+                    </div>
+                </div>
+                <p class="announcement-text">
+                    Ont la joie de vous convier au mariage de leurs enfants, petits-enfants, frères et sœurs
+                </p>
+            </div>
+
+            <div class="couple-names">Ornella & Charles</div>
+
+            <div class="divider"><div class="div-line"></div><div class="div-diamond"></div><div class="div-line"></div></div>
+
+            <div class="date-text">Jeudi 27 Août 2026</div>
+            <p class="time-text">À 17H30</p>
+
+            <div style="margin-top: 22px;">
+                <p class="lieu-title">HOUPPA & SOIRÉE</p>
+                <p class="lieu-name">LES SALONS BACCARA</p>
+                <p class="lieu-adresse">61 rue Saint André, 93000 Bobigny</p>
+            </div>
+
+            <div class="btn-container" style="margin-top: 18px;">
+                <a href="https://waze.com/ul?q=61+rue+Saint+Andre+93000+Bobigny&navigate=yes" target="_blank" class="btn-action">📍 Waze — Baccara</a>
+                <a href="data:text/calendar;charset=utf8,BEGIN:VCALENDAR%0AVERSION:2.0%0ABEGIN:VEVENT%0ADTSTART:20260827T153000Z%0ADTEND:20260828T000000Z%0ASUMMARY:Mariage%20Ornella%20%26%20Charles%20%E2%80%94%20Houppa%20%26%20Soir%C3%A9e%0ALOCATION:61%20rue%20Saint%20Andr%C3%A9%2C%2093000%20Bobigny%0AEND:VEVENT%0AEND:VCALENDAR" download="mariage-houppa.ics" class="btn-action">📅 Bloquer la date</a>
+            </div>
+
+            <div class="memorial">
+                En mémoire de ceux qui nous accompagnent dans nos cœurs :<br>
+                Brigitte Haouzi, Alice Haouzi, Charles Haouzi,<br>
+                Rosette Nahum & Édouard Nahum.
+            </div>
+        </div>
+
+        <!-- CONFIRMATION / RSVP -->
+        <div id="confirmation" class="card reveal">
+            <div class="deco-corner deco-tr">🌷</div>
+            <h3>Confirmation</h3>
+            <div class="divider"><div class="div-line"></div><div class="div-diamond"></div><div class="div-line"></div></div>
+            <p style="font-size: 0.85rem; font-style: italic; margin-bottom: 28px; color: var(--text-mid);">Réponse souhaitée avant le 1er Juillet 2026</p>
             <form id="rsvpForm">
-                <div style="text-align: left; max-width: 400px; margin: 0 auto 20px;">
-                    <label style="font-size: 11px; text-transform: uppercase; color: #888;">Nom & Prénom</label>
-                    <input type="text" required style="width: 100%; padding: 10px; border: none; border-bottom: 1px solid #d1a965; background: transparent; font-size: 18px; outline: none;">
+                <label class="form-label">Nom & Prénom *</label>
+                <input type="text" name="nom" required placeholder="Ex : Famille Haouzi">
+
+                <label class="form-label">Présent(e) à la Mairie ? *</label>
+                <select name="mairie_presence" id="mairie_pres" onchange="handlePresence('mairie')" required>
+                    <option value="" disabled selected>Faites votre choix</option>
+                    <option value="oui">Oui, avec joie</option>
+                    <option value="non">Hélas, non</option>
+                </select>
+                <div id="mairie_qty" class="hidden-qty">
+                    <label class="form-label">Nombre de personnes (Mairie)</label>
+                    <input type="number" name="mairie_nb" id="mairie_input" min="1" placeholder="1">
                 </div>
-                <div style="text-align: left; max-width: 400px; margin: 0 auto 20px;">
-                    <label style="font-size: 11px; text-transform: uppercase; color: #888;">Présence Mairie ?</label>
-                    <select id="m-select" onchange="document.getElementById('m-field').style.display=(this.value=='oui'?'block':'none')" style="width: 100%; padding: 10px; border: none; border-bottom: 1px solid #d1a965; background: transparent; font-size: 18px;">
-                        <option value="non">Non</option>
-                        <option value="oui">Oui</option>
-                    </select>
-                    <div id="m-field" style="display:none; margin-top: 10px;">
-                        <input type="number" min="1" placeholder="Nombre de personnes" style="width: 100%; padding: 10px; border: none; border-bottom: 1px solid #d1a965; background: transparent; font-size: 18px;">
-                    </div>
+
+                <label class="form-label">Présent(e) à la Houppa & Soirée ? *</label>
+                <select name="houppa_presence" id="houppa_pres" onchange="handlePresence('houppa')" required>
+                    <option value="" disabled selected>Faites votre choix</option>
+                    <option value="oui">Oui, avec joie</option>
+                    <option value="non">Hélas, non</option>
+                </select>
+                <div id="houppa_qty" class="hidden-qty">
+                    <label class="form-label">Nombre de personnes (Houppa)</label>
+                    <input type="number" name="houppa_nb" id="houppa_input" min="1" placeholder="1">
                 </div>
-                <div style="text-align: left; max-width: 400px; margin: 0 auto 20px;">
-                    <label style="font-size: 11px; text-transform: uppercase; color: #888;">Présence Houppa ?</label>
-                    <select id="h-select" onchange="document.getElementById('h-field').style.display=(this.value=='oui'?'block':'none')" style="width: 100%; padding: 10px; border: none; border-bottom: 1px solid #d1a965; background: transparent; font-size: 18px;">
-                        <option value="non">Non</option>
-                        <option value="oui">Oui</option>
-                    </select>
-                    <div id="h-field" style="display:none; margin-top: 10px;">
-                        <input type="number" min="1" placeholder="Nombre de personnes" style="width: 100%; padding: 10px; border: none; border-bottom: 1px solid #d1a965; background: transparent; font-size: 18px;">
-                    </div>
-                </div>
-                <button type="submit" class="submit-btn">CONFIRMER</button>
+
+                <label class="form-label">Un message pour les mariés</label>
+                <textarea name="message" rows="3" placeholder="Votre message…"></textarea>
+
+                <button type="submit" class="btn-submit">Confirmer ma présence ✦</button>
             </form>
         </div>
-    </section>
+
+    </div><!-- /main-wrapper -->
 
     <script>
-        function createPetal() {
-            const petal = document.createElement('div');
-            petal.classList.add('petal');
-            const size = Math.random() * 10 + 7;
-            petal.style.width = size + 'px';
-            petal.style.height = (size * 1.5) + 'px';
-            petal.style.left = Math.random() * 100 + 'vw';
-            petal.style.animationDuration = Math.random() * 3 + 4 + 's';
-            document.body.appendChild(petal);
-            setTimeout(() => petal.remove(), 7000);
-        }
-        setInterval(createPetal, 400);
+        // Reveal au scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 
-        const music = document.getElementById('weddingMusic');
-        const icon = document.getElementById('music-icon');
-        let isPlaying = false;
-        window.addEventListener('scroll', () => { if (!isPlaying) { music.play().catch(() => {}); isPlaying = true; icon.innerText = "||"; } }, { once: true });
-        function toggleMusic() {
-            if (isPlaying) { music.pause(); icon.innerText = "▶"; } else { music.play(); icon.innerText = "||"; }
-            isPlaying = !isPlaying;
+        // RSVP : affichage nb personnes
+        function handlePresence(type) {
+            const val = document.getElementById(type + '_pres').value;
+            const div = document.getElementById(type + '_qty');
+            const inp = document.getElementById(type + '_input');
+            if (val === 'oui') { div.style.display = 'block'; if (!inp.value) inp.value = 1; }
+            else               { div.style.display = 'none'; inp.value = 0; }
         }
+
+        // Musique
+        const music = document.getElementById('bg-music');
+        const icon  = document.getElementById('music-icon');
+        const btn   = document.getElementById('music-control');
+        let started = false;
+
+        function startMusic() {
+            if (started) return;
+            music.play().then(() => {
+                started = true;
+                icon.classList.replace('fa-music', 'fa-pause');
+                btn.classList.add('music-anim');
+            }).catch(() => {});
+        }
+        ['scroll','touchstart','click'].forEach(ev => window.addEventListener(ev, startMusic, { once: true }));
+
+        function toggleMusic() {
+            started = true;
+            if (music.paused) {
+                music.play();
+                icon.classList.replace('fa-music','fa-pause');
+                btn.classList.add('music-anim');
+            } else {
+                music.pause();
+                icon.classList.replace('fa-pause','fa-music');
+                btn.classList.remove('music-anim');
+            }
+        }
+
+        // RSVP → Google Sheet (à brancher avec votre propre script URL)
+        const scriptURL = 'VOTRE_SCRIPT_GOOGLE_SHEET_URL_ICI';
+        document.getElementById('rsvpForm').addEventListener('submit', e => {
+            e.preventDefault();
+            const submitBtn = e.target.querySelector('.btn-submit');
+            submitBtn.disabled = true;
+            submitBtn.innerText = 'Envoi en cours…';
+            fetch(scriptURL, { method: 'POST', body: new FormData(e.target) })
+                .then(() => {
+                    alert('Merci ! Votre réponse a bien été enregistrée. 🌸');
+                    submitBtn.innerText = 'Confirmé ✦';
+                    e.target.reset();
+                })
+                .catch(() => {
+                    alert('Une erreur est survenue, veuillez réessayer.');
+                    submitBtn.disabled = false;
+                    submitBtn.innerText = 'Confirmer ma présence ✦';
+                });
+        });
     </script>
 </body>
 </html>
