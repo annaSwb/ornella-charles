@@ -7,172 +7,190 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cinzel:wght@400;500&family=Cormorant+Garamond:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <style>
         :root {
-            --ibiza-sun: #F2C94C; 
-            --ocean-blue: #2D9CDB;
-            --blanc-pur: #FFFFFF;
+            --gold: #C5A059; 
+            --gold-light: #E8D5B5;
+            --white: #FFFFFF;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body, html {
-            height: 100%; width: 100%;
+            height: 100%;
+            width: 100%;
+            background-color: var(--white);
             font-family: 'Cormorant Garamond', serif;
-            background-color: var(--blanc-pur);
             overflow: hidden;
         }
 
-        /* --- LE CADRE FLORAL (fleur.png) --- */
-        /* On le met en fond fixe qui prend tout l'écran mais ne cache rien au centre */
+        /* --- FOND FLORAL INVERSÉ ET PLEIN ÉCRAN --- */
         .floral-background {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             background-image: url('fleur.png');
+            background-size: cover; /* Remplit tout l'écran */
             background-position: center;
-            background-size: 100% 100%; /* Force l'image à faire la taille exacte de l'écran */
             background-repeat: no-repeat;
-            z-index: 1; /* Tout en bas */
+            /* INVERSION DE L'IMAGE VERS LA DROITE */
+            transform: scaleX(-1); 
+            z-index: 1;
         }
 
-        /* --- LE CONTENU (Au dessus des fleurs) --- */
-        .main-container {
+        /* --- CONTENEUR DE CONTENU --- */
+        .main-wrapper {
             position: relative;
-            height: 100%; width: 100%;
+            z-index: 10;
+            height: 100%;
+            width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            z-index: 10; /* Devant les fleurs */
-            padding: 40px; /* Espace de sécurité pour ne pas toucher les bords des fleurs */
+            text-align: center;
+            padding: 20px;
+            /* On s'assure que le contenu n'est pas inversé lui aussi */
+            transform: none; 
         }
 
-        /* Photo Arche */
-        .photo-container {
-            width: 140px; height: 190px;
-            border: 2px solid var(--ibiza-sun);
-            padding: 4px; background: #fff;
-            border-radius: 70px 70px 0 0;
-            margin-bottom: 15px;
+        .photo-arche {
+            width: 150px;
+            height: 200px;
+            background: #fff;
+            padding: 4px;
+            border: 1px solid var(--gold-light);
+            border-radius: 75px 75px 0 0;
+            margin-bottom: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
-        .photo-container img {
-            width: 100%; height: 100%;
+        .photo-arche img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            border-radius: 66px 66px 0 0;
+            border-radius: 71px 71px 0 0;
+            display: block;
         }
 
         h1 {
             font-family: 'Pinyon Script', cursive;
-            font-size: 2.8rem;
-            color: var(--ibiza-sun);
-            margin-bottom: 10px;
-            line-height: 1;
+            font-size: 3rem;
+            color: var(--gold);
+            margin-bottom: 20px;
+            line-height: 1.1;
+            font-weight: 400;
+            text-shadow: 0px 2px 4px rgba(255, 255, 255, 0.8);
         }
 
-        /* Compteur */
-        .countdown {
-            display: flex; gap: 15px;
-            margin-bottom: 25px;
+        .timer-container {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 35px;
+            background: rgba(255, 255, 255, 0.4);
+            padding: 10px 15px;
+            border-radius: 50px;
         }
 
-        .count-box { display: flex; flex-direction: column; align-items: center; }
-        .count-num { font-size: 1.1rem; font-weight: 700; color: var(--ocean-blue); }
-        .count-label { font-size: 0.55rem; text-transform: uppercase; color: var(--ocean-blue); letter-spacing: 1px; }
+        .timer-box {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 45px;
+        }
 
-        /* Bouton */
-        .btn {
-            background-color: var(--ocean-blue);
+        .timer-val {
+            font-size: 1.2rem;
+            color: var(--gold);
+            font-weight: 600;
+        }
+
+        .timer-label {
+            font-size: 0.55rem;
+            text-transform: uppercase;
+            color: #666;
+            letter-spacing: 1.5px;
+            margin-top: 3px;
+        }
+
+        .btn-open {
+            background-color: #B08D57;
             color: #fff;
             text-decoration: none;
-            padding: 14px 35px;
-            font-size: 0.7rem;
-            font-family: 'Montserrat', sans-serif;
-            text-transform: uppercase;
+            font-family: 'Cinzel', serif;
+            font-size: 0.75rem;
+            padding: 16px 40px;
             letter-spacing: 2px;
-            border-radius: 50px;
-            font-weight: 700;
-            box-shadow: 0 4px 10px rgba(45, 156, 219, 0.3);
+            text-transform: uppercase;
+            transition: 0.3s;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        /* Pluie d'or */
-        #gold-rain-container {
-            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none; z-index: 5; overflow: hidden;
-        }
-        .gold-speck {
-            position: absolute; width: 3px; height: 3px;
-            background-color: var(--ibiza-sun); border-radius: 50%; opacity: 0;
-            animation: fall linear infinite;
-        }
-        @keyframes fall {
-            0% { transform: translateY(-10vh); opacity: 0; }
-            20% { opacity: 0.6; }
-            100% { transform: translateY(110vh); opacity: 0; }
-        }
-
-        /* Ajustement Mobile */
-        @media (max-width: 450px) {
+        @media (max-width: 480px) {
+            h1 { font-size: 2.7rem; }
+            .photo-arche { width: 130px; height: 180px; }
             .floral-background {
-                background-size: contain; /* Évite de trop zoomer sur les fleurs sur petit écran */
+                background-size: cover;
             }
-            h1 { font-size: 2.4rem; }
-            .photo-container { width: 120px; height: 160px; }
         }
     </style>
 </head>
 <body>
 
     <div class="floral-background"></div>
-    
-    <div id="gold-rain-container"></div>
 
-    <div class="main-container">
-        <div class="photo-container">
+    <div class="main-wrapper">
+        
+        <div class="photo-arche">
             <img src="photo.jpeg" alt="Ornella & Charles">
         </div>
-        
+
         <h1>Ornella & Charles</h1>
-        
-        <div class="countdown" id="countdown">
-            <div class="count-box"><span class="count-num" id="d">00</span><span class="count-label">Jours</span></div>
-            <div class="count-box"><span class="count-num" id="h">00</span><span class="count-label">Heures</span></div>
-            <div class="count-box"><span class="count-num" id="m">00</span><span class="count-label">Min</span></div>
-            <div class="count-box"><span class="count-num" id="s">00</span><span class="count-label">Sec</span></div>
+
+        <div class="timer-container">
+            <div class="timer-box">
+                <span class="timer-val" id="d">00</span>
+                <span class="timer-label">Jours</span>
+            </div>
+            <div class="timer-box">
+                <span class="timer-val" id="h">00</span>
+                <span class="timer-label">Hrs</span>
+            </div>
+            <div class="timer-box">
+                <span class="timer-val" id="m">00</span>
+                <span class="timer-label">Min</span>
+            </div>
+            <div class="timer-box">
+                <span class="timer-val" id="s">00</span>
+                <span class="timer-label">Sec</span>
+            </div>
         </div>
 
-        <a href="premiere-page.html" class="btn">Voir l'invitation</a>
+        <a href="premiere-page.html" class="btn-open">Voir l'invitation</a>
+
     </div>
 
     <script>
-        const targetDate = new Date(2026, 6, 29, 17, 30, 0).getTime();
-        setInterval(() => {
-            const now = new Date().getTime();
-            const diff = targetDate - now;
-            if (diff > 0) {
-                document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000);
-            }
-        }, 1000);
+        const target = new Date(2026, 6, 29, 17, 30, 0).getTime();
 
-        function createGoldRain() {
-            const container = document.getElementById('gold-rain-container');
-            for (let i = 0; i < 25; i++) {
-                const speck = document.createElement('div');
-                speck.classList.add('gold-speck');
-                speck.style.left = Math.random() * 100 + '%';
-                speck.style.animationDuration = (Math.random() * 5 + 4) + 's';
-                speck.style.animationDelay = (Math.random() * 5) + 's';
-                container.appendChild(speck);
+        function updateTimer() {
+            const now = new Date().getTime();
+            const diff = target - now;
+
+            if (diff > 0) {
+                document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000);
             }
         }
-        createGoldRain();
+        setInterval(updateTimer, 1000);
+        updateTimer();
     </script>
+
 </body>
 </html>
