@@ -3,17 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Ornella & Charles</title>
+    <title>Mariage de Ornella & Charles</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:wght@400;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Pinyon+Script&family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
             --ibiza-sun: #F2C94C; 
             --ocean-blue: #2D9CDB;
-            --white: #FFFFFF;
+            --blanc-pur: #FFFFFF;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,95 +21,117 @@
         body, html {
             height: 100%; width: 100%;
             font-family: 'Cormorant Garamond', serif;
-            background-color: var(--white);
+            background-color: var(--blanc-pur);
             overflow: hidden;
         }
 
-        /* LE FOND : Tes fleurs servent de cadre tout autour */
-        .main-bg {
-            position: absolute;
+        /* --- LE CADRE FLORAL (fleur.png) --- */
+        /* On le met en fond fixe qui prend tout l'écran mais ne cache rien au centre */
+        .floral-background {
+            position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             background-image: url('fleur.png');
             background-position: center;
-            background-size: cover; /* Remplit l'écran pour faire le cadre */
-            z-index: 1;
+            background-size: 100% 100%; /* Force l'image à faire la taille exacte de l'écran */
+            background-repeat: no-repeat;
+            z-index: 1; /* Tout en bas */
         }
 
-        /* CONTENEUR CENTRAL : Détaché du fond pour être lisible */
-        .content-wrapper {
+        /* --- LE CONTENU (Au dessus des fleurs) --- */
+        .main-container {
             position: relative;
             height: 100%; width: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            z-index: 10;
-            background: rgba(255,255,255,0.2); /* Très léger voile pour la lisibilité */
+            z-index: 10; /* Devant les fleurs */
+            padding: 40px; /* Espace de sécurité pour ne pas toucher les bords des fleurs */
         }
 
-        /* Photo en Arche */
+        /* Photo Arche */
         .photo-container {
-            width: 150px; height: 210px;
+            width: 140px; height: 190px;
             border: 2px solid var(--ibiza-sun);
-            padding: 5px; background: #fff;
-            border-radius: 75px 75px 0 0;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            padding: 4px; background: #fff;
+            border-radius: 70px 70px 0 0;
+            margin-bottom: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
         }
 
         .photo-container img {
             width: 100%; height: 100%;
             object-fit: cover;
-            border-radius: 70px 70px 0 0;
+            border-radius: 66px 66px 0 0;
         }
 
         h1 {
             font-family: 'Pinyon Script', cursive;
-            font-size: 3rem;
+            font-size: 2.8rem;
             color: var(--ibiza-sun);
-            margin-bottom: 15px;
-            text-shadow: 0 2px 4px rgba(255,255,255,0.8);
+            margin-bottom: 10px;
+            line-height: 1;
         }
 
         /* Compteur */
         .countdown {
-            display: flex; gap: 20px;
-            margin-bottom: 35px;
+            display: flex; gap: 15px;
+            margin-bottom: 25px;
         }
 
         .count-box { display: flex; flex-direction: column; align-items: center; }
-        .count-num { font-size: 1.4rem; font-weight: 700; color: var(--ocean-blue); }
-        .count-label { font-size: 0.6rem; text-transform: uppercase; color: var(--ocean-blue); letter-spacing: 1px; }
+        .count-num { font-size: 1.1rem; font-weight: 700; color: var(--ocean-blue); }
+        .count-label { font-size: 0.55rem; text-transform: uppercase; color: var(--ocean-blue); letter-spacing: 1px; }
 
         /* Bouton */
         .btn {
             background-color: var(--ocean-blue);
             color: #fff;
             text-decoration: none;
-            padding: 15px 40px;
-            font-size: 0.8rem;
+            padding: 14px 35px;
+            font-size: 0.7rem;
             font-family: 'Montserrat', sans-serif;
             text-transform: uppercase;
             letter-spacing: 2px;
             border-radius: 50px;
             font-weight: 700;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(45, 156, 219, 0.3);
+            box-shadow: 0 4px 10px rgba(45, 156, 219, 0.3);
         }
 
-        @media (max-width: 400px) {
-            h1 { font-size: 2.6rem; }
-            .photo-container { width: 130px; height: 180px; }
-            .main-bg { background-size: contain; background-repeat: no-repeat; } /* Évite le zoom trop fort sur petit tel */
+        /* Pluie d'or */
+        #gold-rain-container {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none; z-index: 5; overflow: hidden;
+        }
+        .gold-speck {
+            position: absolute; width: 3px; height: 3px;
+            background-color: var(--ibiza-sun); border-radius: 50%; opacity: 0;
+            animation: fall linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(-10vh); opacity: 0; }
+            20% { opacity: 0.6; }
+            100% { transform: translateY(110vh); opacity: 0; }
+        }
+
+        /* Ajustement Mobile */
+        @media (max-width: 450px) {
+            .floral-background {
+                background-size: contain; /* Évite de trop zoomer sur les fleurs sur petit écran */
+            }
+            h1 { font-size: 2.4rem; }
+            .photo-container { width: 120px; height: 160px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="main-bg"></div>
+    <div class="floral-background"></div>
+    
+    <div id="gold-rain-container"></div>
 
-    <div class="content-wrapper">
+    <div class="main-container">
         <div class="photo-container">
             <img src="photo.jpeg" alt="Ornella & Charles">
         </div>
@@ -138,6 +160,19 @@
                 document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000);
             }
         }, 1000);
+
+        function createGoldRain() {
+            const container = document.getElementById('gold-rain-container');
+            for (let i = 0; i < 25; i++) {
+                const speck = document.createElement('div');
+                speck.classList.add('gold-speck');
+                speck.style.left = Math.random() * 100 + '%';
+                speck.style.animationDuration = (Math.random() * 5 + 4) + 's';
+                speck.style.animationDelay = (Math.random() * 5) + 's';
+                container.appendChild(speck);
+            }
+        }
+        createGoldRain();
     </script>
 </body>
 </html>
