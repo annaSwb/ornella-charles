@@ -56,17 +56,18 @@
             background-repeat: no-repeat;
         }
 
-        /* --- SURCOUCHE FLEURS (IMAGE fleur.png) --- */
+        /* --- SURCOUCHE FLEURS (IMAGE fleur.png) RECENTRÉE --- */
         .floral-overlay {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: 12; /* Par-dessus la photo et le titre */
+            z-index: 12; 
             background-image: url('fleur.png');
             background-position: center center;
-            background-size: cover;
+            /* Changement de 'cover' à 'contain' pour que l'image soit entière sur mobile */
+            background-size: contain; 
             background-repeat: no-repeat;
-            pointer-events: none; /* Laisse cliquer le bouton en dessous */
+            pointer-events: none; 
         }
 
         /* --- PLUIE D'OR --- */
@@ -176,7 +177,7 @@
             font-weight: 600;
             box-shadow: 0 5px 15px rgba(176, 141, 87, 0.2);
             position: relative;
-            z-index: 15; /* Pour être cliquable malgré l'overlay */
+            z-index: 15; 
         }
 
         .btn:hover { 
@@ -188,6 +189,10 @@
         @media (max-width: 380px) {
             .photo-container { width: 120px; height: 170px; }
             h1 { font-size: 2.2rem; }
+            /* Ajustement spécifique pour les très petits écrans */
+            .floral-overlay {
+                background-size: 95% auto;
+            }
         }
     </style>
 </head>
@@ -213,13 +218,12 @@
                 <div class="count-box"><span class="count-num" id="s">00</span><span class="count-label">Sec</span></div>
             </div>
 
-            <a href="invitation.html" class="btn" id="open-btn">Voir l'invitation</a>
+            <a href="premiere-page.html" class="btn" id="open-btn">Voir l'invitation</a>
 
         </div>
     </div>
 
     <script>
-        // Date du mariage : 29 Juillet 2026
         const targetDate = new Date(2026, 6, 29, 17, 30, 0).getTime();
 
         setInterval(() => {
