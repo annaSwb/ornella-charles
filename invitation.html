@@ -11,78 +11,48 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
-        :root {
-            --gold-main: #C5A059; /* Le doré Eliah & Dov */
-            --gold-light: #E8D5B5;
-            --bg-creme: #FFFEFA;
-            --text-dark: #333;
-        }
-
+        :root { --gold-main: #C5A059; --gold-light: #E8D5B5; --bg-creme: #FFFEFA; --text-dark: #333; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body {
-            font-family: 'Cormorant Garamond', serif;
-            background-color: var(--bg-creme);
-            color: var(--text-dark);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
+        body { font-family: 'Cormorant Garamond', serif; background-color: var(--bg-creme); color: var(--text-dark); overflow-x: hidden; line-height: 1.6; }
 
-        nav {
-            position: sticky; top: 0; width: 100%; z-index: 1000;
-            background: rgba(255, 254, 250, 0.98);
-            border-bottom: 1px solid var(--gold-light);
-            padding: 15px 0; display: flex; justify-content: center; gap: 15px;
-        }
-        nav a {
-            text-decoration: none; color: var(--text-dark);
-            font-family: 'Montserrat', sans-serif; text-transform: uppercase; 
-            letter-spacing: 2px; font-size: 0.7rem; font-weight: 700;
-        }
+        #splash { position: fixed; top:0; left:0; width:100%; height:100%; background: var(--bg-creme); display:flex; justify-content:center; align-items:center; z-index:9999; transition: opacity 1.2s; cursor: pointer; }
+        #splash img { width: 180px; animation: heartbeat 2.5s ease-in-out infinite; }
+        @keyframes heartbeat { 0%, 100% { transform: scale(1); } 25% { transform: scale(1.15); } 50% { transform: scale(1); } 75% { transform: scale(1.1); } }
 
-        .main-wrapper {
-            max-width: 600px; margin: 0 auto; padding: 40px 10px;
-            display: flex; flex-direction: column; gap: 60px;
-        }
-
-        .card {
-            position: relative; padding: 60px 35px; background-color: #fff;
-            border: 1px solid var(--gold-main); box-shadow: 0 10px 30px rgba(0,0,0,0.03);
-            text-align: center; 
-        }
-
-        .card::after {
-            content: ''; position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px;
-            border: 1px solid var(--gold-light); opacity: 0.5; pointer-events: none;
-        }
-
+        nav { position: sticky; top: 0; width: 100%; z-index: 1000; background: rgba(255, 254, 250, 0.98); border-bottom: 1px solid var(--gold-light); padding: 15px 0; display: flex; justify-content: center; gap: 15px; }
+        nav a { text-decoration: none; color: var(--text-dark); font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 2px; font-size: 0.7rem; font-weight: 700; }
+        .main-wrapper { max-width: 600px; margin: 0 auto; padding: 40px 10px; display: flex; flex-direction: column; gap: 60px; }
+        .card { position: relative; padding: 60px 35px; background-color: #fff; border: 1px solid var(--gold-main); box-shadow: 0 10px 30px rgba(0,0,0,0.03); text-align: center; }
+        .card::after { content: ''; position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px; border: 1px solid var(--gold-light); opacity: 0.5; pointer-events: none; }
         #houppa { position: relative; overflow: visible; padding-top: 80px; padding-bottom: 80px; }
         .flower-specific { position: absolute; width: 120px; z-index: 10; }
         .flower-specific-top { top: -30px; right: -40px; }
         .flower-specific-bottom { bottom: -30px; left: -40px; }
-        
         .deco-leaf { position: absolute; top: 0; bottom: 0; width: 80px; background-size: contain; background-repeat: repeat-y; opacity: 0.6; }
         .leaf-left { left: -15px; background-image: url('feuille-gauche1.png'); }
         .leaf-right { right: -15px; background-image: url('feuille-droite1.png'); }
-
         h3 { font-family: 'Cinzel', serif; letter-spacing: 3px; font-size: 1.3rem; color: var(--gold-main); text-transform: uppercase; margin-bottom: 15px; }
         .couple-names { font-family: 'Great Vibes', cursive !important; font-size: 3.5rem; color: var(--gold-main); margin: 10px 0; }
+        .hebrew-row { font-size: 2rem; font-family: serif; color: var(--gold-main); margin-bottom: 10px; }
         .date-main { color: var(--gold-main); font-weight: 700; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; }
         .divider { width: 60px; height: 1px; background: var(--gold-main); margin: 25px auto; }
         .btn-waze { display: inline-block; margin-top: 25px; color: var(--gold-main); border-bottom: 1px solid var(--gold-main); padding-bottom: 5px; text-decoration: none; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-        
         .rsvp-container { text-align: left; margin-top: 30px; }
         .form-label { display: block; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 700; color: var(--gold-main); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
         input[type="text"], input[type="number"], select { width: 100%; padding: 12px 0; border: none; border-bottom: 1.5px solid var(--gold-light); background: transparent; font-family: 'Montserrat', sans-serif; outline: none; }
         .btn-submit { background: var(--gold-main); color: #fff; border: none; padding: 20px; width: 100%; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 4px; font-weight: 700; cursor: pointer; margin-top: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-        
         .music-btn { position: fixed; bottom: 30px; right: 20px; z-index: 2000; width: 55px; height: 55px; border-radius: 50%; background: var(--gold-main); border: 2px solid #fff; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; }
         .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
-        .souvenir-text { font-style: italic; margin-top: 20px; font-size: 0.9rem; color: #555; }
+        .souvenir-text { font-style: italic; margin-top: 20px; font-size: 0.9rem; color: #555; font-weight: 700; }
     </style>
 </head>
 <body>
+
+    <div id="splash" onclick="removeSplash()">
+        <img src="logo.png" alt="Logo">
+    </div>
 
     <audio id="bg-music" loop><source src="musique.mp3" type="audio/mpeg"></audio>
     <button id="music-toggle" class="music-btn" onclick="toggleMusic(event)"><i class="fa-solid fa-play"></i></button>
@@ -119,8 +89,8 @@
                 <img src="hebreu.png" alt="BeSiman Tov" style="width: 80%; max-width: 250px; margin-bottom: 20px;">
                 <img src="houppa.png" alt="Houppa" style="width: 100%; border-radius: 4px; margin-bottom: 20px; border: 1px solid var(--gold-light);">
                 <h3>Cérémonie Religieuse</h3>
-                <div class="couple-names">Ornella & Charles</div>
-                <div class="couple-names">שלום & חוה</div>
+                <div style="font-size: 3rem; font-family: 'Great Vibes', cursive; color: var(--gold-main); margin-bottom:5px;">Ornella & Charles</div>
+                <div class="hebrew-row">  שלום & חוה</div>
                 <div class="divider"></div>
                 <div class="date-main">Mercredi 29 Juillet 2026</div>
                 <p style="margin-top: 10px; font-weight: 600;">À 17H30</p>
@@ -136,12 +106,9 @@
         <div id="rsvp" class="card reveal">
             <div class="card-content">
                 <h3>Confirmation</h3>
-                <p style="font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 1px; margin-bottom: 30px; color: var(--gold-main);">RÉPONSE SOUHAITÉE AVANT LE 1ER JUIN 2026</p>
-                
-                <form id="rsvpForm" class="rsvp-container" action="VOTRE_LIEN_API_SHEETMONKEY" method="POST">
+                <form id="rsvpForm" class="rsvp-container" action="VOTRE_LIEN_API_ICI" method="POST">
                     <label class="form-label">Votre Nom & Prénom</label>
                     <input type="text" name="Nom_Prenom" required>
-
                     <label class="form-label">Présence à la Mairie ?</label>
                     <select name="Mairie_Presence" onchange="showQty('m_qty', this.value === 'oui')">
                         <option value="non">Non</option>
@@ -151,7 +118,6 @@
                         <input type="number" name="Mairie_Adultes" placeholder="Nombre d'adultes">
                         <input type="number" name="Mairie_Enfants" placeholder="Nombre d'enfants (-14 ans)">
                     </div>
-
                     <label class="form-label" style="margin-top: 15px;">Présence à la Houppa ?</label>
                     <select name="Houppa_Presence" onchange="showQty('h_qty', this.value === 'oui')">
                         <option value="non">Non</option>
@@ -161,7 +127,6 @@
                         <input type="number" name="Houppa_Adultes" placeholder="Nombre d'adultes">
                         <input type="number" name="Houppa_Enfants" placeholder="Nombre d'enfants (-14 ans)">
                     </div>
-
                     <button type="submit" id="submitBtn" class="btn-submit">Valider ma réponse</button>
                 </form>
             </div>
@@ -172,38 +137,20 @@
         const audio = document.getElementById("bg-music");
         const musicBtn = document.getElementById("music-toggle");
         let isPlaying = false;
-
+        function removeSplash() {
+            const splash = document.getElementById('splash');
+            splash.style.opacity = '0';
+            setTimeout(() => splash.style.display = 'none', 1200);
+            if(!isPlaying) toggleMusic();
+        }
         function toggleMusic(e) {
             if(e) e.stopPropagation();
-            if (isPlaying) {
-                audio.pause();
-                musicBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-                isPlaying = false;
-            } else {
-                audio.play();
-                musicBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-                isPlaying = true;
-            }
+            if (isPlaying) { audio.pause(); musicBtn.innerHTML = '<i class="fa-solid fa-play"></i>'; isPlaying = false; }
+            else { audio.play(); musicBtn.innerHTML = '<i class="fa-solid fa-pause"></i>'; isPlaying = true; }
         }
-
-        // Déclenchement automatique autorisé dès le premier clic sur la page
-        document.body.addEventListener('click', () => {
-            if(!isPlaying) toggleMusic();
-        }, { once: true });
-
-        function showQty(id, isVisible) {
-            document.getElementById(id).style.display = isVisible ? 'block' : 'none';
-        }
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
-        }, { threshold: 0.1 });
+        function showQty(id, isVisible) { document.getElementById(id).style.display = isVisible ? 'block' : 'none'; }
+        const observer = new IntersectionObserver((entries) => { entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); }); }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-            // Pas de e.preventDefault() ici pour permettre l'envoi vers l'API
-            document.getElementById('submitBtn').textContent = "ENVOI EN COURS...";
-        });
     </script>
 </body>
 </html>
