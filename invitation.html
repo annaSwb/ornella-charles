@@ -12,7 +12,7 @@
 
     <style>
         :root {
-            --gold-main: #C5A059;
+            --gold-main: #C5A059; /* Le doré Eliah & Dov */
             --gold-light: #E8D5B5;
             --bg-creme: #FFFEFA;
             --text-dark: #333;
@@ -56,19 +56,8 @@
             border: 1px solid var(--gold-light); opacity: 0.5; pointer-events: none;
         }
 
-        #houppa {
-            position: relative;
-            overflow: visible;
-            padding-top: 80px;
-            padding-bottom: 80px;
-        }
-
-        .flower-specific {
-            position: absolute;
-            width: 120px;
-            z-index: 10;
-        }
-
+        #houppa { position: relative; overflow: visible; padding-top: 80px; padding-bottom: 80px; }
+        .flower-specific { position: absolute; width: 120px; z-index: 10; }
         .flower-specific-top { top: -30px; right: -40px; }
         .flower-specific-bottom { bottom: -30px; left: -40px; }
         
@@ -80,14 +69,8 @@
         .couple-names { font-family: 'Great Vibes', cursive !important; font-size: 3.5rem; color: var(--gold-main); margin: 10px 0; }
         .date-main { color: var(--gold-main); font-weight: 700; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; }
         .divider { width: 60px; height: 1px; background: var(--gold-main); margin: 25px auto; }
+        .btn-waze { display: inline-block; margin-top: 25px; color: var(--gold-main); border-bottom: 1px solid var(--gold-main); padding-bottom: 5px; text-decoration: none; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
         
-        .btn-waze {
-            display: inline-block; margin-top: 25px; color: var(--gold-main); 
-            border-bottom: 1px solid var(--gold-main); padding-bottom: 5px; 
-            text-decoration: none; font-family: 'Montserrat', sans-serif; 
-            font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px;
-        }
-
         .rsvp-container { text-align: left; margin-top: 30px; }
         .form-label { display: block; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 700; color: var(--gold-main); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
         input[type="text"], input[type="number"], select { width: 100%; padding: 12px 0; border: none; border-bottom: 1.5px solid var(--gold-light); background: transparent; font-family: 'Montserrat', sans-serif; outline: none; }
@@ -111,7 +94,6 @@
     </nav>
 
     <div class="main-wrapper">
-
         <div id="mairie" class="card reveal">
             <div class="deco-leaf leaf-left"></div>
             <div class="deco-leaf leaf-right"></div>
@@ -156,34 +138,28 @@
                 <h3>Confirmation</h3>
                 <p style="font-family: 'Montserrat', sans-serif; font-size: 0.7rem; letter-spacing: 1px; margin-bottom: 30px; color: var(--gold-main);">RÉPONSE SOUHAITÉE AVANT LE 1ER JUIN 2026</p>
                 
-                <form id="rsvpForm" class="rsvp-container" action="VOTRE_LIEN_API_ICI" method="POST">
-                    <div class="form-group" style="margin-bottom: 25px;">
-                        <label class="form-label">Votre Nom & Prénom</label>
-                        <input type="text" name="Nom" required>
+                <form id="rsvpForm" class="rsvp-container" action="VOTRE_LIEN_API_SHEETMONKEY" method="POST">
+                    <label class="form-label">Votre Nom & Prénom</label>
+                    <input type="text" name="Nom_Prenom" required>
+
+                    <label class="form-label">Présence à la Mairie ?</label>
+                    <select name="Mairie_Presence" onchange="showQty('m_qty', this.value === 'oui')">
+                        <option value="non">Non</option>
+                        <option value="oui">Oui</option>
+                    </select>
+                    <div id="m_qty" style="display:none; margin-top:15px;">
+                        <input type="number" name="Mairie_Adultes" placeholder="Nombre d'adultes">
+                        <input type="number" name="Mairie_Enfants" placeholder="Nombre d'enfants (-14 ans)">
                     </div>
 
-                    <div class="form-group" style="margin-bottom: 25px;">
-                        <label class="form-label">Présence à la Mairie ?</label>
-                        <select name="Mairie_Presence" onchange="showQty('m_qty', this.value === 'oui')">
-                            <option value="non">Non</option>
-                            <option value="oui">Oui</option>
-                        </select>
-                        <div id="m_qty" style="display:none; margin-top:15px;">
-                            <input type="number" name="Mairie_Adultes" placeholder="Nombre d'adultes" style="margin-bottom: 10px;">
-                            <input type="number" name="Mairie_Enfants" placeholder="Nombre d'enfants (-14 ans)">
-                        </div>
-                    </div>
-
-                    <div class="form-group" style="margin-bottom: 25px;">
-                        <label class="form-label">Présence à la Houppa ?</label>
-                        <select name="Houppa_Presence" onchange="showQty('h_qty', this.value === 'oui')">
-                            <option value="non">Non</option>
-                            <option value="oui">Oui</option>
-                        </select>
-                        <div id="h_qty" style="display:none; margin-top:15px;">
-                            <input type="number" name="Houppa_Adultes" placeholder="Nombre d'adultes" style="margin-bottom: 10px;">
-                            <input type="number" name="Houppa_Enfants" placeholder="Nombre d'enfants (-14 ans)">
-                        </div>
+                    <label class="form-label" style="margin-top: 15px;">Présence à la Houppa ?</label>
+                    <select name="Houppa_Presence" onchange="showQty('h_qty', this.value === 'oui')">
+                        <option value="non">Non</option>
+                        <option value="oui">Oui</option>
+                    </select>
+                    <div id="h_qty" style="display:none; margin-top:15px;">
+                        <input type="number" name="Houppa_Adultes" placeholder="Nombre d'adultes">
+                        <input type="number" name="Houppa_Enfants" placeholder="Nombre d'enfants (-14 ans)">
                     </div>
 
                     <button type="submit" id="submitBtn" class="btn-submit">Valider ma réponse</button>
@@ -210,6 +186,11 @@
             }
         }
 
+        // Déclenchement automatique autorisé dès le premier clic sur la page
+        document.body.addEventListener('click', () => {
+            if(!isPlaying) toggleMusic();
+        }, { once: true });
+
         function showQty(id, isVisible) {
             document.getElementById(id).style.display = isVisible ? 'block' : 'none';
         }
@@ -218,6 +199,11 @@
             entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
         }, { threshold: 0.1 });
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+            // Pas de e.preventDefault() ici pour permettre l'envoi vers l'API
+            document.getElementById('submitBtn').textContent = "ENVOI EN COURS...";
+        });
     </script>
 </body>
 </html>
