@@ -66,8 +66,21 @@
         
         .souvenir-text { font-style: italic; margin-top: 25px; font-size: 1rem; color: #444; font-weight: 700; line-height: 1.5; border-top: 1px solid #E8D5B5; padding-top: 15px; }
         
-        .bsd-text { position: absolute; top: 15px; right: 20px; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #C5A059; font-weight: 700; z-index: 5; }
-        .bsd-mairie { right: 20px; }
+        /* Correction ici : décalage vers la gauche et priorité d'affichage */
+.bsd-text { 
+    position: absolute; 
+    top: 15px; 
+    right: 20px; 
+    font-family: 'Cormorant Garamond', serif; 
+    font-size: 1.1rem; 
+    color: #C5A059; 
+    font-weight: 700; 
+    z-index: 100; /* Assure que le texte passe devant les feuilles décoratives */
+}
+
+.bsd-mairie { 
+    right: 50px; /* Passage de 20px à 50px pour le pousser vers la gauche */
+}
 
         .sub-title { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dark); margin: 5px 0 15px 0; }
         #success-msg { display: none; text-align: center; font-family: 'Montserrat', sans-serif; color: var(--gold-main); padding: 20px; font-weight: 700; }
