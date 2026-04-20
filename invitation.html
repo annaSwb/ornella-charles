@@ -174,84 +174,78 @@
     </div>
 
     <script>
-        const audio = document.getElementById("bg-music");
-        const musicBtn = document.getElementById("music-toggle");
-        const splash = document.getElementById('splash');
-        let isPlaying = false;
+    const audio = document.getElementById("bg-music");
+    const musicBtn = document.getElementById("music-toggle");
+    const splash = document.getElementById('splash');
+    let isPlaying = false;
 
-        // Fonction pour retirer le splash ET lancer la musique au premier clic
-        function initExperience() {
-            splash.style.opacity = '0';
-            setTimeout(() => {
-                splash.style.display = 'none';
-            }, 1200);
-           
-            // Tentative de lecture immédiate (autorisée suite à l'interaction utilisateur)
-            startMusic();
-        }
+    function initExperience() {
+        splash.style.opacity = '0';
+        setTimeout(() => { splash.style.display = 'none'; }, 1200);
+        startMusic();
+    }
 
-        // Sécurité automatique après 4 secondes si pas de clic
-        setTimeout(() => { if(splash.style.display !== 'none') initExperience(); }, 4500);
+    setTimeout(() => { if(splash.style.display !== 'none') initExperience(); }, 4500);
 
-        function startMusic() {
-            if (!isPlaying) {
-                audio.play().then(() => {
-                    musicBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
-                    isPlaying = true;
-                }).catch(e => console.log("Lecture auto bloquée"));
-            }
-        }
-
-        // Relance au scroll si la musique n'a pas pu démarrer
-        window.addEventListener('scroll', () => {
-            if (!isPlaying) startMusic();
-        }, { once: true });
-
-        function toggleMusic(e) {
-            if(e) e.stopPropagation();
-            if (isPlaying) {
-                audio.pause();
-                musicBtn.innerHTML = '<i class="fa-solid fa-play"></i>';
-                isPlaying = false;
-            } else {
-                audio.play();
+    function startMusic() {
+        if (!isPlaying) {
+            audio.play().then(() => {
                 musicBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
                 isPlaying = true;
-            }
+            }).catch(e => console.log("Lecture auto bloquée"));
+        }
+    }
+
+    window.addEventListener('scroll', () => { if (!isPlaying) startMusic(); }, { once: true });
+
+    function toggleMusic(e) {
+        if(e) e.stopPropagation();
+        if (isPlaying) { audio.pause(); musicBtn.innerHTML = '<i class="fa-solid fa-play"></i>'; isPlaying = false; }
+        else { audio.play(); musicBtn.innerHTML = '<i class="fa-solid fa-pause"></i>'; isPlaying = true; }
+    }
+
+    // --- PARTIE À REMPLACER (MISE À JOUR CI-DESSOUS) ---
+    document.getElementById('rsvpForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const form = this;
+        const btn = form.querySelector('.btn-submit');
+        btn.innerHTML = "Envoi en cours...";
+        btn.disabled = true;
+
+        // Préparation des données pour Google Script
+        const formData = new FormData(form);
+        const params = new URLSearchParams();
+        for (const pair of formData.entries()) {
+            params.append(pair[0], pair[1]);
         }
 
-        // Formulaire
-        document.getElementById('rsvpForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const form = this;
-            const btn = form.querySelector('.btn-submit');
-            btn.innerHTML = "Envoi en cours...";
-            btn.disabled = true;
-
-            fetch(form.action, { method: 'POST', body: new FormData(form) })
-            .then(() => {
-                form.style.display = 'none';
-                document.getElementById('success-msg').style.display = 'block';
-            })
-            .catch(() => {
-                alert("Erreur lors de l'envoi. Réessayez.");
-                btn.innerHTML = "Valider ma réponse";
-                btn.disabled = false;
-            });
+        fetch(form.action, {
+            method: 'POST',
+            mode: 'no-cors', // Important pour éviter les erreurs de sécurité avec Google
+            body: params
+        })
+        .then(() => { 
+            form.style.display = 'none';
+            document.getElementById('success-msg').style.display = 'block';
+        })
+        .catch(error => {
+            console.error('Erreur:', error);
+            alert("Erreur lors de l'envoi.");
+            btn.innerHTML = "Valider ma réponse";
+            btn.disabled = false;
         });
+    });
+    // --- FIN DE LA PARTIE MISE À JOUR ---
 
-        function showQty(id, isVisible) {
-            document.getElementById(id).style.display = isVisible ? 'block' : 'none';
-        }
-       
-        // Animation au scroll
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if(entry.isIntersecting) entry.target.classList.add('active');
-            });
-        }, { threshold: 0.1 });
-       
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
+    function showQty(id, isVisible) { 
+        document.getElementById(id).style.display = isVisible ? 'block' : 'none'; 
+    }
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
+    }, { threshold: 0.1 });
+    
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
