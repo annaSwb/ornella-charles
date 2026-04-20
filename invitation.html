@@ -27,14 +27,13 @@
         .card { position: relative; padding: 60px 25px; background-color: #fff; border: 1px solid var(--gold-main); box-shadow: 0 10px 30px rgba(0,0,0,0.03); text-align: center; overflow: hidden; }
         .card::after { content: ''; position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px; border: 1px solid var(--gold-light); opacity: 0.5; pointer-events: none; }
         
-        /* Correction Noms sur une ligne */
         .couple-names, .names-inline { 
             font-family: 'Great Vibes', cursive !important; 
             color: var(--gold-main); 
             margin: 10px 0; 
             white-space: nowrap; 
             display: block;
-            font-size: clamp(2rem, 10vw, 3.5rem); /* Taille fluide selon l'écran */
+            font-size: clamp(2rem, 10vw, 3.5rem); 
         }
 
         #houppa { position: relative; overflow: visible; padding-top: 80px; padding-bottom: 80px; }
@@ -66,21 +65,8 @@
         
         .souvenir-text { font-style: italic; margin-top: 25px; font-size: 1rem; color: #444; font-weight: 700; line-height: 1.5; border-top: 1px solid #E8D5B5; padding-top: 15px; }
         
-        /* Correction ici : décalage vers la gauche et priorité d'affichage */
-.bsd-text { 
-    position: absolute; 
-    top: 15px; 
-    right: 20px; 
-    font-family: 'Cormorant Garamond', serif; 
-    font-size: 1.1rem; 
-    color: #C5A059; 
-    font-weight: 700; 
-    z-index: 100; /* Assure que le texte passe devant les feuilles décoratives */
-}
-
-.bsd-mairie { 
-    right: 50px; /* Passage de 20px à 50px pour le pousser vers la gauche */
-}
+        .bsd-text { position: absolute; top: 15px; right: 20px; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #C5A059; font-weight: 700; z-index: 100; }
+        .bsd-mairie { right: 50px; }
 
         .sub-title { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dark); margin: 5px 0 15px 0; }
         #success-msg { display: none; text-align: center; font-family: 'Montserrat', sans-serif; color: var(--gold-main); padding: 20px; font-weight: 700; }
@@ -179,33 +165,35 @@
         const splash = document.getElementById('splash');
         let isPlaying = false;
 
-        // Fonction pour retirer le splash ET lancer la musique au premier clic
+        // Fonction lancée au clic sur le splash screen
         function initExperience() {
+            if(splash.style.display === 'none') return;
+
+            // Retrait du splash
             splash.style.opacity = '0';
             setTimeout(() => {
                 splash.style.display = 'none';
             }, 1200);
             
-            // Tentative de lecture immédiate (autorisée suite à l'interaction utilisateur)
+            // Lancement de la musique (autorisé car suite à un clic)
             startMusic();
         }
 
-        // Sécurité automatique après 4 secondes si pas de clic
-        setTimeout(() => { if(splash.style.display !== 'none') initExperience(); }, 4500);
+        // Sécurité : si l'utilisateur ne clique pas, on retire le splash après 5s
+        setTimeout(() => { if(splash.style.display !== 'none') initExperience(); }, 5000);
 
         function startMusic() {
             if (!isPlaying) {
                 audio.play().then(() => {
                     musicBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
                     isPlaying = true;
-                }).catch(e => console.log("Lecture auto bloquée"));
+                }).catch(e => {
+                    console.log("Autoplay bloqué, attente interaction supplémentaire");
+                    // Fallback : on réessaie au premier scroll ou clic sur le document
+                    window.addEventListener('scroll', () => { if(!isPlaying) startMusic(); }, { once: true });
+                });
             }
         }
-
-        // Relance au scroll si la musique n'a pas pu démarrer
-        window.addEventListener('scroll', () => {
-            if (!isPlaying) startMusic();
-        }, { once: true });
 
         function toggleMusic(e) {
             if(e) e.stopPropagation();
@@ -220,7 +208,7 @@
             }
         }
 
-        // Formulaire
+        // Formulaire RSVP
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             e.preventDefault();
             const form = this;
@@ -244,7 +232,7 @@
             document.getElementById(id).style.display = isVisible ? 'block' : 'none'; 
         }
         
-        // Animation au scroll
+        // Animation des cartes au scroll
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if(entry.isIntersecting) entry.target.classList.add('active');
