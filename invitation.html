@@ -50,6 +50,26 @@
         .souvenir-text { font-style: italic; margin-top: 20px; font-size: 0.9rem; color: #555; font-weight: 700; }
         /* Style message succès */
         #success-msg { display: none; text-align: center; font-family: 'Montserrat', sans-serif; color: var(--gold-main); padding: 20px; }
+        souvenir-text {
+    font-style: italic;
+    margin-top: 25px;
+    font-size: 1rem; /* Légèrement plus grand */
+    color: #444;
+    font-weight: 700; /* Plus prononcé */
+    line-height: 1.5;
+    border-top: 1px solid #E8D5B5; /* Un petit trait fin au-dessus */
+    padding-top: 15px;
+}
+        .bsd-text { position: absolute; top: 15px; right: 20px; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #C5A059; font-weight: 700; } /* Version décalée pour la Mairie */ .bsd-mairie { right: 50px; /* Ajustez ce chiffre selon vos besoins (plus il est grand, plus ça va vers la gauche) */ }
+.sub-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-dark);
+    margin: 5px 0 15px 0;
+}
+   
     </style>
 </head>
 <body>
@@ -69,19 +89,22 @@
 
     <div class="main-wrapper">
         <div id="mairie" class="card reveal">
+            <span class="bsd-text bsd-mairie">בס"ד</span>
             <div class="deco-leaf leaf-left"></div>
             <div class="deco-leaf leaf-right"></div>
             <i class="fa-solid fa-landmark" style="color: var(--gold-main); font-size: 1.5rem; margin-bottom: 10px;"></i>
-            <h3>Mariage Civil</h3>
+            <h3>Cérémonie Civile</h3>
             <div class="couple-names">Ornella & Charles</div>
+            <div class="sub-title">se diront "oui"</div>
             <div class="divider"></div>
-            <div class="date-main">Lundi 27 Juillet 2026</div>
+            <div class="date-main">Le Lundi 27 Juillet 2026</div>
             <p style="margin-top: 10px; font-weight: 600;">À 15H30</p>
             <p><strong>Mairie de Joinville-le-Pont</strong></p>
             <a href="https://waze.com/ul?q=Mairie%20de%20Joinville-le-Pont" target="_blank" class="btn-waze">GPS WAZE</a>
         </div>
 
         <div id="houppa" class="card reveal">
+            <span class="bsd-text">בס"ד</span>
             <img src="haut-droite.png" alt="" class="flower-specific flower-specific-top">
             <img src="bas-gauche.png" alt="" class="flower-specific flower-specific-bottom">
             <img src="hebreu.png" alt="BeSiman Tov" style="width: 80%; max-width: 250px; margin-bottom: 20px;">
@@ -93,7 +116,10 @@
             <div class="date-main">Mercredi 29 Juillet 2026</div>
             <p style="margin-top: 10px; font-weight: 600;">À 17H30</p>
             <p><strong>La Verrière 91</strong></p>
-            <p class="souvenir-text">En ce jour si précieux, nous avons une tendre pensée pour la mémoire de ma maman, Brigitte Léa Haouzi.</p>
+            <p class="souvenir-text">
+    En ce jour si précieux, nous avons une tendre pensée pour la mémoire de ma maman,
+    Brigitte Léa Haouzi, notre étoile qui illuminera ce mariage de sa lumière éternelle.
+    Ainsi qu’à tous nos chers disparus partis trop tôt.</p>
             <a href="https://waze.com/ul?q=La%20Verriere%2091" target="_blank" class="btn-waze">GPS WAZE</a>
         </div>
 
