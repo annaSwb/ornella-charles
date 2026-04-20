@@ -34,7 +34,8 @@
         .leaf-right { right: -15px; background-image: url('feuille-droite1.png'); }
         h3 { font-family: 'Cinzel', serif; letter-spacing: 3px; font-size: 1.3rem; color: var(--gold-main); text-transform: uppercase; margin-bottom: 15px; }
         .couple-names { font-family: 'Great Vibes', cursive !important; font-size: 3.5rem; color: var(--gold-main); margin: 10px 0; }
-        .names-inline { font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--gold-main); margin: 10px 0; }
+        /* Modification ici : white-space: nowrap pour forcer la ligne */
+        .names-inline { font-family: 'Great Vibes', cursive; font-size: 3rem; color: var(--gold-main); margin: 10px 0; white-space: nowrap; }
         .hebrew-row { font-size: 2rem; font-family: serif; color: var(--gold-main); margin-bottom: 10px; }
         .date-main { color: var(--gold-main); font-weight: 700; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; }
         .divider { width: 60px; height: 1px; background: var(--gold-main); margin: 25px auto; }
@@ -47,6 +48,8 @@
         .reveal { opacity: 0; transform: translateY(30px); transition: 1s ease; }
         .reveal.active { opacity: 1; transform: translateY(0); }
         .souvenir-text { font-style: italic; margin-top: 20px; font-size: 0.9rem; color: #555; font-weight: 700; }
+        /* Style message succès */
+        #success-msg { display: none; text-align: center; font-family: 'Montserrat', sans-serif; color: var(--gold-main); padding: 20px; }
     </style>
 </head>
 <body>
@@ -96,7 +99,7 @@
 
         <div id="rsvp" class="card reveal">
             <h3>Confirmation</h3>
-            <form id="rsvpForm" class="rsvp-container" action="https://script.google.com/macros/s/AKfycbzGdeDrj7O8F9VU20HS-zG22evISJBJBwkDYg65z3tvhIMMlQEAD1lIk8olcVEWSU3l/exec" method="POST">
+            <form id="rsvpForm" class="rsvp-container" action="VOTRE_LIEN_API_ICI" method="POST">
                 <label class="form-label">Votre Nom & Prénom</label>
                 <input type="text" name="Nom_Prenom" required>
                 
@@ -111,7 +114,7 @@
                 
                 <label class="form-label" style="margin-top: 15px;">Présence à la Houppa ?</label>
                 <select name="Houppa_Presence" onchange="showQty('h_qty', this.value === 'oui')">
-                    <option value="non">Non</option><option value="oui">Oui</option>
+                    <option value="non">Non</option><option value="oui">Oui</button>
                 </select>
                 <div id="h_qty" style="display:none; margin-top:15px;">
                     <input type="number" name="Houppa_Adultes" placeholder="Nombre d'adultes">
@@ -123,6 +126,7 @@
 
                 <button type="submit" class="btn-submit">Valider ma réponse</button>
             </form>
+            <div id="success-msg">Merci ! Votre réponse a bien été enregistrée.</div>
         </div>
     </div>
 
@@ -132,7 +136,6 @@
         const splash = document.getElementById('splash');
         let isPlaying = false;
 
-        // Auto splash 4s
         setTimeout(() => removeSplash(), 4000);
 
         function removeSplash() {
@@ -142,7 +145,6 @@
             }
         }
 
-        // Musique au scroll
         window.addEventListener('scroll', () => {
             if (!isPlaying) {
                 audio.play().then(() => { musicBtn.innerHTML = '<i class="fa-solid fa-pause"></i>'; isPlaying = true; }).catch(()=>{});
@@ -155,11 +157,15 @@
             else { audio.play(); musicBtn.innerHTML = '<i class="fa-solid fa-pause"></i>'; isPlaying = true; }
         }
 
-        // Soumission Formulaire
+        // Soumission Formulaire sans alerte
         document.getElementById('rsvpForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            fetch(this.action, { method: 'POST', body: new FormData(this) })
-            .then(() => { alert("Merci ! Votre réponse a bien été enregistrée."); this.reset(); });
+            const form = this;
+            fetch(form.action, { method: 'POST', body: new FormData(form) })
+            .then(() => { 
+                form.style.display = 'none';
+                document.getElementById('success-msg').style.display = 'block';
+            });
         });
 
         function showQty(id, isVisible) { document.getElementById(id).style.display = isVisible ? 'block' : 'none'; }

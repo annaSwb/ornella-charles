@@ -26,7 +26,6 @@
             overflow: hidden;
         }
 
-        /* --- FOND FLORAL INVERSÉ ET PLEIN ÉCRAN --- */
         .floral-background {
             position: absolute;
             top: 0;
@@ -34,15 +33,13 @@
             width: 100%;
             height: 100%;
             background-image: url('fleur.png');
-            background-size: cover; /* Remplit tout l'écran */
+            background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
-            /* INVERSION DE L'IMAGE VERS LA DROITE */
             transform: scaleX(-1); 
             z-index: 1;
         }
 
-        /* --- CONTENEUR DE CONTENU --- */
         .main-wrapper {
             position: relative;
             z-index: 10;
@@ -54,57 +51,47 @@
             justify-content: center;
             text-align: center;
             padding: 20px;
-            /* On s'assure que le contenu n'est pas inversé lui aussi */
-            transform: none; 
         }
 
-        /* --- CADRE PHOTO AGRANDI --- */
         .photo-arche {
-            /* Dimensions augmentées */
-            width: 200px;  /* Était 150px */
-            height: 270px; /* Était 200px */
+            width: 180px; 
+            height: 240px; 
             background: #fff;
-            padding: 5px; /* Légèrement augmenté */
+            padding: 5px;
             border: 1px solid var(--gold-light);
-            /* Rayon ajusté pour la nouvelle largeur (width / 2) */
-            border-radius: 100px 100px 0 0; 
-            margin-bottom: 25px; /* Un peu plus d'espace en dessous */
+            border-radius: 90px 90px 0 0; 
+            margin-bottom: 20px;
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            /* Important pour que le zoom de l'image ne dépasse pas */
             overflow: hidden; 
-            display: flex; /* Pour centrer l'image zoomée */
+            display: flex;
             align-items: center;
             justify-content: center;
         }
 
-        /* --- PHOTO AVEC ZOOM --- */
         .photo-arche img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            /* Rayon ajusté pour l'image intérieure */
-            border-radius: 95px 95px 0 0; 
-            display: block;
-            /* AJOUT DU ZOOM ICI (1.3 = 130%) */
+            border-radius: 85px 85px 0 0; 
             transform: scale(1.3); 
         }
 
+        /* Taille réduite ici */
         h1 {
             font-family: 'Pinyon Script', cursive;
-            font-size: 3rem;
+            font-size: 2.2rem; 
             color: var(--gold);
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             line-height: 1.1;
             font-weight: 400;
-            text-shadow: 0px 2px 4px rgba(255, 255, 255, 0.8);
         }
 
         .timer-container {
             display: flex;
-            gap: 15px;
-            margin-bottom: 35px;
+            gap: 12px;
+            margin-bottom: 30px;
             background: rgba(255, 255, 255, 0.4);
-            padding: 10px 15px;
+            padding: 8px 12px;
             border-radius: 50px;
         }
 
@@ -112,21 +99,22 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-width: 45px;
+            min-width: 35px;
         }
 
+        /* Taille réduite ici */
         .timer-val {
-            font-size: 1.2rem;
+            font-size: 1rem;
             color: var(--gold);
             font-weight: 600;
         }
 
         .timer-label {
-            font-size: 0.55rem;
+            font-size: 0.45rem;
             text-transform: uppercase;
             color: #666;
-            letter-spacing: 1.5px;
-            margin-top: 3px;
+            letter-spacing: 1px;
+            margin-top: 2px;
         }
 
         .btn-open {
@@ -134,29 +122,18 @@
             color: #fff;
             text-decoration: none;
             font-family: 'Cinzel', serif;
-            font-size: 0.75rem;
-            padding: 16px 40px;
+            font-size: 0.7rem;
+            padding: 12px 30px;
             letter-spacing: 2px;
             text-transform: uppercase;
             transition: 0.3s;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
-        /* --- ADAPTATION MOBILE AJUSTÉE --- */
         @media (max-width: 480px) {
-            h1 { font-size: 2.7rem; }
-            /* Cadre un peu plus petit sur mobile mais reste plus grand qu'avant */
-            .photo-arche { 
-                width: 170px; 
-                height: 230px; 
-                border-radius: 85px 85px 0 0;
-            }
-            .photo-arche img {
-                border-radius: 80px 80px 0 0;
-            }
-            .floral-background {
-                background-size: cover;
-            }
+            h1 { font-size: 2.1rem; }
+            .photo-arche { width: 150px; height: 200px; border-radius: 75px 75px 0 0; }
+            .photo-arche img { border-radius: 70px 70px 0 0; }
         }
     </style>
 </head>
@@ -165,7 +142,6 @@
     <div class="floral-background"></div>
 
     <div class="main-wrapper">
-        
         <div class="photo-arche">
             <img src="photo.jpeg" alt="Ornella & Charles">
         </div>
@@ -192,11 +168,9 @@
         </div>
 
         <a href="invitation.html" class="btn-open">Voir l'invitation</a>
-
     </div>
 
     <script>
-        // Date cible : 29 Juillet 2026 à 17h30 (Mois est 0-indexé, donc 6 = Juillet)
         const target = new Date(2026, 6, 29, 17, 30, 0).getTime();
 
         function updateTimer() {
@@ -204,23 +178,14 @@
             const diff = target - now;
 
             if (diff > 0) {
-                // Calculs basiques sans padding (00)
                 document.getElementById('d').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
                 document.getElementById('h').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 document.getElementById('m').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
                 document.getElementById('s').innerText = Math.floor((diff % (1000 * 60)) / 1000);
-            } else {
-                // Si la date est passée
-                document.getElementById('d').innerText = "0";
-                document.getElementById('h').innerText = "0";
-                document.getElementById('m').innerText = "0";
-                document.getElementById('s').innerText = "0";
             }
         }
-        // Mise à jour immédiate et toutes les secondes
         updateTimer();
         setInterval(updateTimer, 1000);
     </script>
-
 </body>
 </html>
