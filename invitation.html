@@ -16,7 +16,8 @@
         html { scroll-behavior: smooth; }
         body { font-family: 'Cormorant Garamond', serif; background-color: var(--bg-creme); color: var(--text-dark); overflow-x: hidden; line-height: 1.6; }
 
-        #splash { position: fixed; top:0; left:0; width:100%; height:100%; background: var(--bg-creme); display:flex; justify-content:center; align-items:center; z-index:9999; transition: opacity 0.3s ease; cursor: pointer; }
+        /* Splash réduit à 2s */
+        #splash { position: fixed; top:0; left:0; width:100%; height:100%; background: var(--bg-creme); display:flex; justify-content:center; align-items:center; z-index:9999; transition: opacity 0.5s ease; }
         #splash img { width: 180px; animation: heartbeat 2s ease-in-out infinite; }
         @keyframes heartbeat { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
@@ -51,35 +52,39 @@
         .card.active > *:nth-child(7) { transition-delay: 0.65s; }
         
         .card::after { content: ''; position: absolute; top: 8px; left: 8px; right: 8px; bottom: 8px; border: 1px solid var(--gold-light); opacity: 0.5; pointer-events: none; }
-       
+        
         .couple-names, .names-inline { font-family: 'Great Vibes', cursive !important; color: var(--gold-main); margin: 10px 0; white-space: nowrap; display: block; font-size: clamp(2rem, 10vw, 3.5rem); }
 
         #houppa { position: relative; overflow: visible; padding-top: 80px; padding-bottom: 80px; }
         .flower-specific { position: absolute; width: 120px; z-index: 10; }
         .flower-specific-top { top: -30px; right: -40px; }
         .flower-specific-bottom { bottom: -30px; left: -40px; }
-       
+        
         .deco-leaf { position: absolute; top: 0; bottom: 0; width: 80px; background-size: contain; background-repeat: repeat-y; opacity: 0.6; }
         .leaf-left { left: -15px; background-image: url('feuille-gauche1.png'); }
         .leaf-right { right: -15px; background-image: url('feuille-droite1.png'); }
-       
+        
         h3 { font-family: 'Cinzel', serif; letter-spacing: 3px; font-size: 1.3rem; color: var(--gold-main); text-transform: uppercase; margin-bottom: 15px; }
         .hebrew-row { font-size: 2rem; font-family: serif; color: var(--gold-main); margin-bottom: 10px; }
-        .date-main { color: var(--gold-main); font-weight: 700; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; }
+        .date-main { color: var(--gold-main); font-weight: 900; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; font-style: normal; }
         .divider { width: 60px; height: 1px; background: var(--gold-main); margin: 25px auto; }
-       
+        
         .btn-waze { display: inline-block; margin-top: 25px; color: var(--gold-main); border-bottom: 1px solid var(--gold-main); padding-bottom: 5px; text-decoration: none; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-       
+        
         .rsvp-container { text-align: left; margin-top: 30px; }
-        .form-label { display: block; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 700; color: var(--gold-main); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
-        input[type="text"], input[type="number"], select { width: 100%; padding: 12px 0; border: none; border-bottom: 1.5px solid var(--gold-light); background: transparent; font-family: 'Montserrat', sans-serif; outline: none; margin-bottom: 10px; }
-       
+        /* Labels en poids normal */
+        .form-label { display: block; font-family: 'Montserrat', sans-serif; font-size: 0.95rem; font-weight: 400; color: var(--gold-main); text-transform: uppercase; margin-bottom: 10px; letter-spacing: 1px; }
+        input[type="text"], input[type="number"], select { width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid var(--gold-main); background: transparent; font-family: 'Montserrat', sans-serif; outline: none; margin-bottom: 10px; font-size: 1rem; color: var(--text-dark); }
+        
+        /* Seulement les inputs nombre en gras */
+        input[type="number"] { font-weight: 900 !important; }
+
         .btn-submit { background: var(--gold-main); color: #fff; border: none; padding: 20px; width: 100%; font-family: 'Montserrat', sans-serif; text-transform: uppercase; letter-spacing: 4px; font-weight: 700; cursor: pointer; margin-top: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
-       
+        
         .music-btn { position: fixed; bottom: 30px; right: 20px; z-index: 2000; width: 55px; height: 55px; border-radius: 50%; background: var(--gold-main); border: 2px solid #fff; color: #fff; display: flex; align-items: center; justify-content: center; cursor: pointer; }
-       
+        
         .souvenir-text { font-style: italic; margin-top: 25px; font-size: 1rem; color: #444; font-weight: 700; line-height: 1.5; border-top: 1px solid #E8D5B5; padding-top: 15px; }
-       
+        
         .bsd-text { position: absolute; top: 15px; right: 20px; font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #C5A059; font-weight: 700; z-index: 100; }
         .bsd-mairie { right: 50px; }
 
@@ -89,7 +94,7 @@
 </head>
 <body>
 
-    <div id="splash" onclick="initExperience()">
+    <div id="splash">
         <img src="logo.png" alt="Logo">
     </div>
 
@@ -107,15 +112,15 @@
             <span class="bsd-text bsd-mairie">בס"ד</span>
             <div class="deco-leaf leaf-left"></div>
             <div class="deco-leaf leaf-right"></div>
-            <i class="fa-solid fa-rings-wedding" style="color: var(--gold-main); font-size: 1.5rem; margin-bottom: 10px;"></i>
-            <h3 style="font-size: 1rem;">Cérémonie Civile</h3>
+            <i class="fa-solid fa-ring" style="color: var(--gold-main); font-size: 1.5rem; margin-bottom: 10px;"></i>
+            <h3 style="font-size: 0.9rem;">Cérémonie Civile</h3>
             <div class="couple-names">Ornella & Charles</div>
             <div class="sub-title">se diront "oui"</div>
             <div class="divider"></div>
-            <div class="date-main">Le <strong>Lundi 27 Juillet 2026</strong></div>
+            <div class="date-main">Le Lundi 27 Juillet 2026</div>
             <p style="margin-top: 10px; font-weight: 600;">À 15H30</p>
             <p><strong>Mairie de Joinville-le-Pont</strong></p>
-            <a href="https://waze.com/ul?q=Mairie%20de%20Joinville-le-Pont" target="_blank" class="btn-waze">GPS WAZE</a>
+            <a href="https://waze.com/ul?q=Mairie%20de%20Joinville-le-Pont" target="_blank" class="btn-waze">🚗 GPS WAZE</a> <button onclick="addToCalendar('mairie')" class="btn-waze" style="background:none;border:none;cursor:pointer;margin-top:25px;">📅 Bloquer la date</button>
         </div>
 
         <div id="houppa" class="card">
@@ -128,15 +133,16 @@
             <div class="names-inline">Ornella & Charles</div>
             <div class="hebrew-row">שלום & חוה</div>
             <div class="divider"></div>
-            <div class="date-main"><strong>Mercredi 29 Juillet 2026</strong></div>
+            <div class="date-main">Mercredi 29 Juillet 2026</div>
             <p style="margin-top: 10px; font-weight: 600;">À 17H30</p>
-            <p><strong>La Verrière 91</strong></p>
+            <br><p><strong>à La Salle Baccara</strong></p>
+            <p><strong>61 rue saint André 93000 Bobigny</strong></p>
             <p class="souvenir-text">
                 En ce jour si précieux, nous avons une tendre pensée pour la mémoire de ma maman,
                 Brigitte Léa Haouzi, notre étoile qui illuminera ce mariage de sa lumière éternelle.
                 Ainsi qu’à tous nos chers disparus partis trop tôt.
             </p>
-            <a href="https://waze.com/ul?q=La%20Verriere%2091" target="_blank" class="btn-waze">GPS WAZE</a>
+            <a href="https://waze.com/ul?q=61%20rue%20saint%20Andr%C3%A9%2C%2093000%20Bobigny" target="_blank" class="btn-waze">🚗 GPS WAZE</a> <button onclick="addToCalendar('houppa')" class="btn-waze" style="background:none;border:none;cursor:pointer;margin-top:25px;">📅 Bloquer la date</button>
         </div>
 
         <div id="rsvp" class="card">
@@ -168,7 +174,7 @@
                 <label class="form-label" style="margin-top: 15px;">Message (Mazal Tov !)</label>
                 <input type="text" name="Message" placeholder="Votre petit mot pour les mariés">
 
-                <button type="submit" class="btn-submit">Valider ma réponse</button>
+                <p style="font-family:'Montserrat',sans-serif;font-size:0.8rem;font-weight:700;color:var(--gold-main);text-align:center;margin-top:20px;">⏰ Merci de confirmer avant le <strong>27 juin 2026</strong></p><button type="submit" class="btn-submit">Valider ma réponse</button>
             </form>
             <div id="success-msg">Merci ! Votre réponse a bien été enregistrée.</div>
         </div>
@@ -180,30 +186,31 @@
     const splash = document.getElementById('splash');
     let isPlaying = false;
 
-    function initExperience() {
-        splash.style.opacity = '0';
-        setTimeout(() => { splash.style.display = 'none'; }, 300);
-        startMusic();
-    }
-
-    setTimeout(() => { if(splash.style.display !== 'none') initExperience(); }, 1500);
+    // Splash auto-dismiss après 2s
+    setTimeout(() => { 
+        splash.style.opacity = '0'; 
+        setTimeout(() => splash.style.display = 'none', 500);
+    }, 2000);
 
     function startMusic() {
         if (!isPlaying) {
             audio.play().then(() => {
                 musicBtn.innerHTML = '<i class="fa-solid fa-pause"></i>';
                 isPlaying = true;
-            }).catch(e => console.log("Lecture auto bloquée"));
+            }).catch(e => console.log("Interaction utilisateur requise"));
         }
     }
 
-    function onScrollMusic() {
+    // Déclencheur global (scroll, click, touch)
+    function handleInteraction() {
         startMusic();
-        window.removeEventListener('scroll', onScrollMusic);
-        window.removeEventListener('touchmove', onScrollMusic);
+        window.removeEventListener('scroll', handleInteraction);
+        window.removeEventListener('click', handleInteraction);
+        window.removeEventListener('touchstart', handleInteraction);
     }
-    window.addEventListener('scroll', onScrollMusic, { passive: true });
-    window.addEventListener('touchmove', onScrollMusic, { passive: true });
+    window.addEventListener('scroll', handleInteraction);
+    window.addEventListener('click', handleInteraction);
+    window.addEventListener('touchstart', handleInteraction);
 
     function toggleMusic(e) {
         if(e) e.stopPropagation();
@@ -213,22 +220,27 @@
 
     document.getElementById('rsvpForm').addEventListener('submit', function(e) {
         e.preventDefault();
-        const form = this;
-        const btn = form.querySelector('.btn-submit');
+        const btn = this.querySelector('.btn-submit');
         btn.innerHTML = "Envoi en cours...";
         btn.disabled = true;
-        const formData = new FormData(form);
-        const params = new URLSearchParams();
-        ['Nom_Prenom','Mairie_Presence','Mairie_Adultes','Mairie_Enfants',
-         'Houppa_Presence','Houppa_Adultes','Houppa_Enfants','Message'].forEach(key => {
-            params.append(key, formData.get(key) || '');
-        });
-        fetch(form.action, { method: 'POST', mode: 'no-cors', body: params })
-        .then(() => { form.style.display = 'none'; document.getElementById('success-msg').style.display = 'block'; })
-        .catch(error => { console.error('Erreur:', error); alert("Erreur lors de l'envoi."); btn.innerHTML = "Valider ma réponse"; btn.disabled = false; });
+        const params = new URLSearchParams(new FormData(this));
+        fetch(this.action, { method: 'POST', mode: 'no-cors', body: params })
+        .then(() => { this.style.display = 'none'; document.getElementById('success-msg').style.display = 'block'; })
+        .catch(() => alert("Erreur"));
     });
 
     function showQty(id, isVisible) { document.getElementById(id).style.display = isVisible ? 'block' : 'none'; }
+
+    function addToCalendar(evt) {
+        var title = evt === 'mairie' ? 'Mariage – Cérémonie Civile' : 'Mariage – Houppa';
+        var start = evt === 'mairie' ? '20260727T133000Z' : '20260729T153000Z';
+        var end = evt === 'mairie' ? '20260727T153000Z' : '20260729T193000Z';
+        var location = evt === 'mairie' ? 'Mairie de Joinville-le-Pont' : '61 rue saint André, 93000 Bobigny';
+        var ics = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nBEGIN:VEVENT\r\nDTSTART:'+start+'\r\nDTEND:'+end+'\r\nSUMMARY:'+title+'\r\nLOCATION:'+location+'\r\nEND:VEVENT\r\nEND:VCALENDAR';
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(new Blob([ics], {type:'text/calendar'}));
+        a.download = evt+'_mariage.ics'; a.click();
+    }
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => { if(entry.isIntersecting) entry.target.classList.add('active'); });
