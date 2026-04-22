@@ -13,7 +13,7 @@
         :root {
             --gold: #C5A059;
             --gold-light: #E8D5B5;
-            --white: #FFFFFF;
+            --beige-light: #F9F7F2; /* Couleur beige très clair */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -21,7 +21,7 @@
         body, html {
             height: 100%;
             width: 100%;
-            background-color: var(--white);
+            background-color: var(--beige-light);
             font-family: 'Cormorant Garamond', serif;
             overflow: hidden;
         }
@@ -173,7 +173,6 @@
 </head>
 <body>
 
-    <!-- Tout est dans #mainPage : fond floral + contenu -->
     <div id="mainPage">
 
         <div class="floral-background"></div>
@@ -207,7 +206,7 @@
             <a href="invitation.html" class="btn-open" id="btnInvite">Voir l'invitation</a>
         </div>
 
-    </div><!-- fin #mainPage -->
+    </div>
 
     <script>
         const target = new Date(2026, 6, 29, 17, 30, 0).getTime();
