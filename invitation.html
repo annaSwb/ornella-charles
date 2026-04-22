@@ -66,7 +66,9 @@
         
         h3 { font-family: 'Cinzel', serif; letter-spacing: 3px; font-size: 1.3rem; color: var(--gold-main); text-transform: uppercase; margin-bottom: 15px; }
         .hebrew-row { font-size: 2rem; font-family: serif; color: var(--gold-main); margin-bottom: 10px; }
-        .date-main { color: var(--gold-main); font-weight: 900; font-size: 1.2rem; text-transform: uppercase; letter-spacing: 2px; font-style: normal; }
+        .date-main { color: var(--gold-main); font-weight: 900; font-size: 1.9rem; text-transform: uppercase; letter-spacing: 2px; font-style: normal; }
+        .time-info { margin-top: 10px; font-weight: 400; font-size: 1.7rem; color: var(--text-dark); }
+        .venue-info { font-size: 1.2rem; margin-top: 6px; }
         .divider { width: 60px; height: 1px; background: var(--gold-main); margin: 25px auto; }
         
         .btn-waze { display: inline-block; margin-top: 25px; color: var(--gold-main); border-bottom: 1px solid var(--gold-main); padding-bottom: 5px; text-decoration: none; font-family: 'Montserrat', sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
@@ -89,6 +91,7 @@
         .bsd-mairie { right: 50px; }
 
         .sub-title { font-family: 'Montserrat', sans-serif; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; color: var(--text-dark); margin: 5px 0 15px 0; }
+        .hachem-text { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-style: italic; color: #666; line-height: 1.7; margin: 8px 0 4px 0; }
         #success-msg { display: none; text-align: center; font-family: 'Montserrat', sans-serif; color: var(--gold-main); padding: 20px; font-weight: 700; }
     </style>
 </head>
@@ -112,15 +115,33 @@
             <span class="bsd-text bsd-mairie">בס"ד</span>
             <div class="deco-leaf leaf-left"></div>
             <div class="deco-leaf leaf-right"></div>
-            <i class="fa-solid fa-ring" style="color: var(--gold-main); font-size: 1.5rem; margin-bottom: 10px;"></i>
+            <svg width="80" height="42" viewBox="0 0 80 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-bottom: 12px;">
+                <defs>
+                    <linearGradient id="goldGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" style="stop-color:#E8C97A;stop-opacity:1" />
+                        <stop offset="40%" style="stop-color:#C5A059;stop-opacity:1" />
+                        <stop offset="70%" style="stop-color:#F0D98A;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#A07830;stop-opacity:1" />
+                    </linearGradient>
+                    <linearGradient id="goldGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                        <stop offset="0%" style="stop-color:#E8C97A;stop-opacity:1" />
+                        <stop offset="40%" style="stop-color:#C5A059;stop-opacity:1" />
+                        <stop offset="70%" style="stop-color:#F0D98A;stop-opacity:1" />
+                        <stop offset="100%" style="stop-color:#A07830;stop-opacity:1" />
+                    </linearGradient>
+                </defs>
+                <circle cx="27" cy="21" r="17" stroke="url(#goldGrad1)" stroke-width="3" fill="none"/>
+                <circle cx="53" cy="21" r="17" stroke="url(#goldGrad2)" stroke-width="3" fill="none"/>
+            </svg>
             <h3 style="font-size: 0.9rem;">Cérémonie Civile</h3>
             <div class="couple-names">Ornella & Charles</div>
             <div class="sub-title">se diront "oui"</div>
             <div class="divider"></div>
-            <div class="date-main">Le Lundi 27 Juillet 2026</div>
-            <p style="margin-top: 10px; font-weight: 600;">À 15H30</p>
-            <p><strong>Mairie de Joinville-le-Pont</strong></p>
-            <a href="https://waze.com/ul?q=Mairie%20de%20Joinville-le-Pont" target="_blank" class="btn-waze">🚗 GPS WAZE</a> <button onclick="addToCalendar('mairie')" class="btn-waze" style="background:none;border:none;cursor:pointer;margin-top:25px;">📅 Bloquer la date</button>
+            <div class="date-main">Le Lundi 24 Août 2026</div>
+            <p class="time-info">À 14H00</p>
+            <p class="venue-info"><strong>Mairie de Suresnes</strong></p>
+            <p class="venue-info"><strong>2 rue Carnot, 92150 Suresnes</strong></p>
+            <a href="https://waze.com/ul?q=2%20rue%20Carnot%2C%2092150%20Suresnes" target="_blank" class="btn-waze">🚗 GPS WAZE</a> <button onclick="addToCalendar('mairie')" class="btn-waze" style="background:none;border:none;cursor:pointer;margin-top:25px;">📅 Bloquer la date</button>
         </div>
 
         <div id="houppa" class="card">
@@ -130,13 +151,14 @@
             <img src="hebreu.png" alt="BeSiman Tov" style="width: 80%; max-width: 250px; margin-bottom: 20px;">
             <img src="houppa.png" alt="Houppa" style="width: 100%; border-radius: 4px; margin-bottom: 20px; border: 1px solid var(--gold-light);">
             <h3>Cérémonie Religieuse</h3>
+            <p class="hachem-text">Nous remercions Hachem de vous convier au mariage<br>de leurs enfants et petits-enfants</p>
             <div class="names-inline">Ornella & Charles</div>
             <div class="hebrew-row">שלום & חוה</div>
             <div class="divider"></div>
-            <div class="date-main">Mercredi 29 Juillet 2026</div>
-            <p style="margin-top: 10px; font-weight: 600;">À 17H30</p>
-            <br><p><strong>à La Salle Baccara</strong></p>
-            <p><strong>61 rue saint André 93000 Bobigny</strong></p>
+            <div class="date-main">Jeudi 27 Août 2026</div>
+            <p class="time-info">À 17H30</p>
+            <br><p class="venue-info"><strong>Les Salons Baccara</strong></p>
+            <p class="venue-info"><strong>61 rue saint André 93000 Bobigny</strong></p>
             <p class="souvenir-text">
                 En ce jour si précieux, nous avons une tendre pensée pour la mémoire de ma maman,
                 Brigitte Léa Haouzi, notre étoile qui illuminera ce mariage de sa lumière éternelle.
@@ -233,9 +255,9 @@
 
     function addToCalendar(evt) {
         var title = evt === 'mairie' ? 'Mariage – Cérémonie Civile' : 'Mariage – Houppa';
-        var start = evt === 'mairie' ? '20260727T133000Z' : '20260729T153000Z';
-        var end = evt === 'mairie' ? '20260727T153000Z' : '20260729T193000Z';
-        var location = evt === 'mairie' ? 'Mairie de Joinville-le-Pont' : '61 rue saint André, 93000 Bobigny';
+        var start = evt === 'mairie' ? '20260824T120000Z' : '20260827T153000Z';
+        var end = evt === 'mairie' ? '20260824T140000Z' : '20260827T193000Z';
+        var location = evt === 'mairie' ? '2 rue Carnot, 92150 Suresnes' : '61 rue saint André, 93000 Bobigny';
         var ics = 'BEGIN:VCALENDAR\r\nVERSION:2.0\r\nBEGIN:VEVENT\r\nDTSTART:'+start+'\r\nDTEND:'+end+'\r\nSUMMARY:'+title+'\r\nLOCATION:'+location+'\r\nEND:VEVENT\r\nEND:VCALENDAR';
         var a = document.createElement('a');
         a.href = URL.createObjectURL(new Blob([ics], {type:'text/calendar'}));
